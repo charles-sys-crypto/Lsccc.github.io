@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lsccc">
+
+
+
+
+
+<title>迷马传奇 | Lsccc</title>
+
+
+
+    <link rel="icon" href="/Lsccc.github.io/icon.svg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/Lsccc.github.io/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/Lsccc.github.io/js/script.js"></script>
+    
+    <script src="/Lsccc.github.io/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">迷马传奇</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Lsccc</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 17, 2025&nbsp;&nbsp;6:00:00</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/Lsccc.github.io/categories/CTF/">CTF</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>前言：</p>
+<blockquote>
+<p>迷马，产生于公元前400多年，是一种上古神兽。人们总是喜欢偷偷圈养迷马，可是人心总是会膨胀，爱炫耀成了人们的致命弱点，经常在不经意间暴露迷马行踪，而且每一次暴露，都会引发一次灾难。作为数字人，人们总是希望，通过计算来封锁迷马的任何信息，但是每个人的想法不同，所以为了更好的保护自己的迷马，人们都争先恐后的learning，来形成自己的迷马锁。</p>
+</blockquote>
+<h3 id="day01"><a href="#day01" class="headerlink" title="day01"></a>day01</h3><h4 id="ez-rsa"><a href="#ez-rsa" class="headerlink" title="ez-rsa"></a>ez-rsa</h4><p><strong>题目</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line">flag = <span class="string">b&#x27;flag&#123;*******&#125;&#x27;</span></span><br><span class="line">p = getPrime(<span class="number">512</span>)</span><br><span class="line">q = getPrime(<span class="number">512</span>)</span><br><span class="line">n = p*q</span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">m = bytes_to_long(flag)</span><br><span class="line">c = <span class="built_in">pow</span>(m, e, n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;p = <span class="subst">&#123;p&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;q = <span class="subst">&#123;q&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;e = <span class="subst">&#123;e&#125;</span>&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&#x27;c = <span class="subst">&#123;c&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">p = 8213746575415297042616092234052797160903894332678857096832837626770828585964931079924391909254687495904906566514425840749686064325932631795707045464434989</span></span><br><span class="line"><span class="string">q = 9753746188058918818984362508209565412016251940743434610953589255489668681637156815626490446966985220493148498756442901233290611558882871005078965294076619</span></span><br><span class="line"><span class="string">e = 65537</span></span><br><span class="line"><span class="string">c = 21359046110462117589800220800181229655666136788219151953932314482412538877725885695323394950311580610437914968268502878608303966729962235669751463793069119222279592253447823189400486587255721216017113442984740248058892060642804390729033784739807689027967604016821254753568980620402733968341626893950123761784</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">*<span class="comment">#参数列表*</span></span><br><span class="line"></span><br><span class="line">p=<span class="number">8213746575415297042616092234052797160903894332678857096832837626770828585964931079924391909254687495904906566514425840749686064325932631795707045464434989</span></span><br><span class="line"></span><br><span class="line">q=<span class="number">9753746188058918818984362508209565412016251940743434610953589255489668681637156815626490446966985220493148498756442901233290611558882871005078965294076619</span></span><br><span class="line"></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">c=<span class="number">21359046110462117589800220800181229655666136788219151953932314482412538877725885695323394950311580610437914968268502878608303966729962235669751463793069119222279592253447823189400486587255721216017113442984740248058892060642804390729033784739807689027967604016821254753568980620402733968341626893950123761784</span></span><br><span class="line"></span><br><span class="line">n = p*q</span><br><span class="line"></span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">d = inverse(e, phi)</span><br><span class="line"></span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(long_to_bytes(m))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># b&#x27;flag&#123;this_is_a_ez_rsa&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="分解质数n"><a href="#分解质数n" class="headerlink" title="分解质数n"></a>分解质数n</h4><p><strong>题目</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">n = <span class="number">1455925529734358105461406532259911790807347616464991065301847</span></span><br><span class="line"></span><br><span class="line">c = <span class="number">69380371057914246192606760686152233225659503366319332065009</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>exp</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">*<span class="comment">#参数列表*</span></span><br><span class="line">e = <span class="number">65537</span></span><br><span class="line"></span><br><span class="line">n = <span class="number">1455925529734358105461406532259911790807347616464991065301847</span></span><br><span class="line"></span><br><span class="line">c = <span class="number">69380371057914246192606760686152233225659503366319332065009</span></span><br><span class="line"></span><br><span class="line">p = <span class="number">1201147059438530786835365194567</span></span><br><span class="line"></span><br><span class="line">q = <span class="number">1212112637077862917192191913841</span></span><br><span class="line"></span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">d = inverse(e, phi)</span><br><span class="line"></span><br><span class="line">m = <span class="built_in">pow</span>(c, d, n)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(m)</span><br><span class="line"></span><br><span class="line"><span class="comment">#584734024210318745406046669953309948776602881661</span></span><br><span class="line"><span class="comment">#再转换成十六进制，再转成ascll码</span></span><br><span class="line"><span class="comment">#flag&#123;fact0r_sma11_N&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lsccc</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/11/17/%E8%BF%B7%E9%A9%AC%E4%BC%A0%E5%A5%87/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/11/17/%E8%BF%B7%E9%A9%AC%E4%BC%A0%E5%A5%87/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/Lsccc.github.io/tags/2025-11/"># 2025-11</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/Lsccc.github.io/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/11/17/%E6%9C%AA%E7%9F%A5%E7%9A%84%E8%B7%AF/">未知的路</a>
+            
+            
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/11/01/%E6%98%8E%E6%96%87%E6%94%BB%E5%87%BB/">明文攻击</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Lsccc | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
