@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lsccc">
+
+
+
+
+
+<title>Lsccc</title>
+
+
+
+    <link rel="icon" href="/Lsccc.github.io/icon.svg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/Lsccc.github.io/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/Lsccc.github.io/js/script.js"></script>
+    
+    <script src="/Lsccc.github.io/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title"></h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Lsccc</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十一月 28, 2025&nbsp;&nbsp;22:26:00</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>title: 数据结构<br>date: 2025-11-28 22:26:00<br>tags: 2025-11<br>categories: knowledges<br>published: true</p>
+<blockquote>
+<p>前言：刚才无意偶然间，百度到了一篇数据结构学习的博客，正好快到期末考试了，那我也来速成一下子，go，go，go，出发喽！</p>
+</blockquote>
+<h1 id="Day01"><a href="#Day01" class="headerlink" title="Day01"></a>Day01</h1><blockquote>
+<p>2025.11.28，晚上加班，今天是第一天，任务不算很重，很简单也很基础</p>
+</blockquote>
+<h2 id="任务清单"><a href="#任务清单" class="headerlink" title="任务清单"></a><strong>任务清单</strong></h2><ol>
+<li>算法与算法分析<ol>
+<li>时间复杂度</li>
+<li>空间复杂度</li>
+</ol>
+</li>
+<li>数据结构的介绍<ol>
+<li>数据结构的定义</li>
+<li>数据结构的表示方法</li>
+</ol>
+</li>
+</ol>
+<h2 id="正片开始！"><a href="#正片开始！" class="headerlink" title="正片开始！"></a><strong>正片开始！</strong></h2><h3 id="1-1-时间复杂度"><a href="#1-1-时间复杂度" class="headerlink" title="1.1 时间复杂度"></a><strong>1.1 时间复杂度</strong></h3><p>​		<strong>时间复杂度：</strong>	分析算法的执行效率</p>
+<p>​		<strong>常见的时间复杂度：</strong>	O(1) &lt; O(logn) &lt; O(n) &lt; O(nlogn) &lt; O(n<sup>2</sup>) &lt; O(2<sup>n</sup>) &lt; O(n!)</p>
+<h4 id="算法分析"><a href="#算法分析" class="headerlink" title="算法分析"></a><strong>算法分析</strong></h4><blockquote>
+<p>主要找到运行次数最多的语句</p>
+</blockquote>
+<h4 id="一重循环"><a href="#一重循环" class="headerlink" title="一重循环"></a><strong>一重循环</strong></h4><p><strong>方法：</strong></p>
+<p>​				1. 模拟循环流程，观察趟数和循环终止变量的关系				</p>
+<p>​				2. 确定循环停止条件并求解						</p>
+<p><strong>例题1：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">i = n * n</span><br><span class="line"><span class="title function_">while</span><span class="params">(i!=<span class="number">1</span>)</span></span><br><span class="line">    i=i/<span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+<p>​				复杂度：O(logn)</p>
+<p><strong>例题2：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span>(n &gt; (x+<span class="number">1</span>) * (x+<span class="number">1</span>))</span><br><span class="line">    x = x + <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>​				复杂度：O(√n)</p>
+<p><strong>例题3：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sum</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span>(sum &lt; n)</span><br><span class="line">        sum += ++i</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​				复杂度：O(√n)</p>
+<h4 id="二重循环"><a href="#二重循环" class="headerlink" title="二重循环"></a><strong>二重循环</strong></h4><p><strong>方法1（数组求和法）：</strong></p>
+<p>​				1. 模拟循环流程，列出外层的值变化				</p>
+<p>​				2. 列出内循环的执行次数		</p>
+<p>​				3. 计算执行次数之和</p>
+<p><strong>例题：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> <span class="number">0</span> , i , j</span><br><span class="line"><span class="title function_">for</span><span class="params">(<span class="type">int</span> i = <span class="number">1</span>;i &lt; n;i++)</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>;j &lt;= <span class="number">2</span> * i;j++)&#123;</span><br><span class="line">		m++;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​				复杂度：O(n<sup>2</sup>)</p>
+<p><strong>方法2：</strong></p>
+<p>​					1. 模拟循环流程，列出外层的值变化				</p>
+<p>​					2. 列出内层值的变化		</p>
+<p>​					3. 计算执行次数之和</p>
+<p><strong>例题：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i , j , a[n][m]</span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;j &lt; m;j++)&#123;</span><br><span class="line">		a[i][j]</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​					复杂度：O(n*m)</p>
+<h4 id="多重循环"><a href="#多重循环" class="headerlink" title="多重循环"></a><strong>多重循环</strong></h4><p><strong>方法（矩阵求和法）：</strong></p>
+<p>​					1. 模拟循环流程，列出外层的值变化				</p>
+<p>​					2. 列出内循环的执行次数		</p>
+<p>​					3. 计算执行次数之和</p>
+<p><strong>例题：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i , j , k </span><br><span class="line"><span class="title function_">for</span><span class="params">(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++)</span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>;j &lt;= i;j++)&#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;k &lt; j;k++)&#123;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用到平方和公式：</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/12.png" class="">
+
+<p>​				复杂度：O(n<sup>3</sup>)</p>
+<h4 id="递归函数"><a href="#递归函数" class="headerlink" title="递归函数"></a><strong>递归函数</strong></h4><p><strong>方法：</strong></p>
+<p>​					1. 模拟递归流程，列出参数变化				</p>
+<p>​					2. 找到边界停止条件，求出递归深度		</p>
+<p>​					3. 公式递推</p>
+<p><strong>例题：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fun</span><span class="params">(<span class="type">int</span> n)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> n*fun(n-<span class="number">1</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>​				复杂度：O(n)</p>
+<p>这个时间复杂度就学到这里，视频教学B站博主<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Ww411e7Ud?vd_source=034de3a03d824b5d0dea447466e0337d">B站教学视频</a></p>
+<h3 id="1-2空间复杂度"><a href="#1-2空间复杂度" class="headerlink" title="1.2空间复杂度"></a><strong>1.2空间复杂度</strong></h3><p>​	空间复杂度：算法所占的内存空间</p>
+<p>​	常见的空间复杂度：O(1) &lt; O(n) &lt; O(n<sup>2</sup>)</p>
+<p><strong>分类讨论</strong></p>
+<ol>
+<li>算法原地工作：所需内存 空间为常量，无论空间规模如何变化，复杂度始终为O(1)</li>
+<li>每次函数调用会定义一个大小为n的数组，一般为O(n)</li>
+<li>每次函数调用会定义一个行列都为n的二维数组,一般为O(n<sup>2</sup>)</li>
+<li>每次调用递归函数,一般是2，3情况的n倍</li>
+</ol>
+<p>这里不在过多思考，这个相较于时间复杂度，简单了些还是放一个链接 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV19u4m1g7N7?vd_source=034de3a03d824b5d0dea447466e0337d">B站教学视频</a></p>
+<h3 id="2-1数据结构的定义"><a href="#2-1数据结构的定义" class="headerlink" title="2.1数据结构的定义"></a><strong>2.1数据结构的定义</strong></h3><p>经典的数据结构</p>
+<ul>
+<li>线性结构：线性表、栈、队列</li>
+<li>层次结构：二叉树、树</li>
+<li>一般结构：图</li>
+</ul>
+<p>数据</p>
+<ul>
+<li>原子数据：基本数据类型、引用数据类型</li>
+<li>复合数据：学生的基本信息（姓名、年龄、身高 ）</li>
+</ul>
+<p>数据结构的基本操作</p>
+<blockquote>
+<p>稍作解释：数据结构是由相互关联的数据形成的组合体，是一个容器</p>
+</blockquote>
+<ul>
+<li>基本的操作：add、remove、update、get、iterate（但是可能叫法不一样）</li>
+<li>数据结构随着施加于它的操作而变化，是动态的</li>
+</ul>
+<h3 id="2-2数据结构的表示方法"><a href="#2-2数据结构的表示方法" class="headerlink" title="2.2数据结构的表示方法"></a><strong>2.2数据结构的表示方法</strong></h3><blockquote>
+<p>前言：高级编程语言提供了变量（用于存储数据）和数组（用于存储大量数据）,而数据结构的实现，就是使用变量和数组描述数据之间的关系，实现规定的各种操作</p>
+</blockquote>
+<p><strong>存储器模型</strong></p>
+<p>类型：内存储器（内存条）和外存储器（磁带，软盘，光盘，固态硬盘）</p>
+<p>数据类型</p>
+<ul>
+<li>int	占4个字节，使用二进制补码编码</li>
+<li>float	占4个字节，使用IEEE 754编码</li>
+<li>double	占8个字节，使用IEEE 754编码</li>
+</ul>
+<p>偏移量：是指从一个参考点到另一个位置的距离或者数值差异，在数组中，可以理解为索引</p>
+<p>今天就这样吧，下次见！</p>
+<h1 id="Day02"><a href="#Day02" class="headerlink" title="Day02"></a>Day02</h1><blockquote>
+<p>2025.12.2，今天来学点，不然进度赶不上了，话不多说直接干！</p>
+</blockquote>
+<h2 id="任务清单-1"><a href="#任务清单-1" class="headerlink" title="任务清单"></a>任务清单</h2><ol>
+<li>线性表的数组实现<ol>
+<li>线性表的定义</li>
+<li>顺序存储的定义</li>
+<li>顺序表基本操作的实现</li>
+</ol>
+</li>
+</ol>
+<h2 id="正片开始！-1"><a href="#正片开始！-1" class="headerlink" title="正片开始！"></a>正片开始！</h2><h3 id="1-1线性表的定义"><a href="#1-1线性表的定义" class="headerlink" title="1.1线性表的定义"></a>1.1线性表的定义</h3> <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/1.png" class="">
+
+<h4 id="一些定义："><a href="#一些定义：" class="headerlink" title="一些定义："></a>一些定义：</h4><p><strong>前后关系：</strong>	为了叙述方便，把上图两者之间的关系叫做前后关系</p>
+<p><strong>前驱：</strong>	除了两边特殊元素，每个元素前面又唯一的数据元素</p>
+<p><strong>后继：</strong>	除了两边特殊元素，每个元素后面又唯一的数据元素</p>
+<p><strong>表头：</strong>	a<sub>0</sub>没有前驱</p>
+<p><strong>表尾：</strong>	a<sub>3</sub>没有后继</p>
+<p><strong>线性表：</strong>	数据排成一条线，这种数据结构叫作表或者线性表</p>
+<p><strong>索引：</strong>	如果按照前后关系给元素编号，0，1，2，3…，每个元素都有唯一的编号，数据元素的编号叫作索引</p>
+<h4 id="线性表接口定义"><a href="#线性表接口定义" class="headerlink" title="线性表接口定义"></a><strong>线性表接口定义</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> list;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> intertace ilist&lt;T&gt;&#123;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> <span class="title function_">size</span><span class="params">()</span>;	<span class="comment">//求表中元素个数</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span>;	<span class="comment">//清空表</span></span><br><span class="line">	<span class="type">boolean</span> <span class="title function_">isEmpty</span><span class="params">()</span>;	<span class="comment">//判空操作</span></span><br><span class="line">	T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span>;	<span class="comment">//根据索引号，获取元素</span></span><br><span class="line">	<span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index,T X)</span>;	<span class="comment">//在指定索引号位置，插入元素</span></span><br><span class="line">	T <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span>;	<span class="comment">//删除指定索引的元素</span></span><br><span class="line">	<span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(T x)</span>;	<span class="comment">//判断元素的索引号（位置）</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2顺序存储的定义"><a href="#1-2顺序存储的定义" class="headerlink" title="1.2顺序存储的定义"></a>1.2顺序存储的定义</h3><p>采用数组实现线性表的顺序存储，因为数组元素存放数据，线性表的数据索引号和数组元素的下标一一对应，借助数据元素的相邻关系表示线性表中数据的前后关系</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/2.png" class="">
+
+<p>线性表的顺序存储是用一组地址连续的存储单元依次存放线性表中的数据元素</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/3.png" class="">
+
+<h4 id="顺序表的定义"><a href="#顺序表的定义" class="headerlink" title="顺序表的定义"></a><strong>顺序表的定义</strong></h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> linearList;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CArrayList</span>&lt;T&gt;&#123;</span><br><span class="line">	<span class="keyword">private</span> Object[] listElem;	<span class="comment">//存储数据的数组</span></span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> size;	<span class="comment">//已经存储的数据的个数</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">CArrayList</span><span class="params">(<span class="type">int</span> maxSize)</span>&#123;</span><br><span class="line">		listElem = <span class="keyword">new</span> <span class="title class_">Object</span>[maxSize];</span><br><span class="line">		<span class="comment">//size = 0;</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>创建实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CArrayList&lt;Integer&gt; sl = <span class="keyword">new</span> <span class="title class_">CArrayList</span>&lt;&gt;(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/4.png" class="">
+
+<h3 id="1-3顺序表基本操作的实现"><a href="#1-3顺序表基本操作的实现" class="headerlink" title="1.3顺序表基本操作的实现"></a>1.3顺序表基本操作的实现</h3><p><strong>注意：</strong></p>
+<p>写在这里，方便后面学习，就是rangecheck检查索引的合法性方法有两种</p>
+<p>第一种就是在Add方法里用的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">rangeCheckForAdd</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt; size)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IndexOutOfBoundsException</span>(String.valueOf(index));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>第二种就是其他方法里用的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">rangeCheck</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IndexOutOfBoundsException</span>(String.valueOf(index));</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-3-1取元素操作"><a href="#1-3-1取元素操作" class="headerlink" title="1.3.1取元素操作"></a>1.3.1取元素操作</h4><p><strong>原型：</strong>	T get（int index）</p>
+<p><strong>作用：</strong>	取出listElem[index]的值</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/5.png" class="">
+
+<p><strong>过程：</strong></p>
+<p>1.判断索引号index的合法性</p>
+<p>合法范围：0 ≤ index ≤ size-1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">rangeCheck</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	 	<span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size)	</span><br><span class="line">  		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IndexOutOfBoundsException</span>(String.valueOf(index));</span><br><span class="line">   &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>2.返回listElem[index]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span>	<span class="comment">//忽略警告</span></span><br><span class="line"><span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	rangeCheck(index);</span><br><span class="line">	<span class="keyword">return</span> (T)elements[index];</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-2修改操作"><a href="#1-3-2修改操作" class="headerlink" title="1.3.2修改操作"></a><strong>1.3.2修改操作</strong></h4><p><strong>原型：</strong>	T set（int index ,T x）</p>
+<p><strong>作用：</strong>	修改listElem[index]的值</p>
+<p><strong>过程</strong>：</p>
+<ol>
+<li>检查索引号的合法性（同1.3.1）</li>
+<li>保存修改前的值</li>
+<li>修改listElem[index]的值</li>
+<li>返回修改签到值</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> T <span class="title function_">set</span><span class="params">(<span class="type">int</span> index, T x)</span> &#123;</span><br><span class="line">		rangeCheck(index);</span><br><span class="line">		<span class="type">T</span> <span class="variable">OldValue</span> <span class="operator">=</span> (T) elements[index];</span><br><span class="line">		elements[index] = x;</span><br><span class="line">		<span class="keyword">return</span> OldValue;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-3-3定位操作"><a href="#1-3-3定位操作" class="headerlink" title="1.3.3定位操作"></a>1.3.3定位操作</h4><p><strong>原型：</strong>	int indexOf(T x)</p>
+<p><strong>作用：</strong>	返回目标值初次出现的位置</p>
+<p><strong>过程：</strong></p>
+<ol>
+<li>依次比较，直到找到或者越界</li>
+<li>判断是否存在</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(T x)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++) &#123;</span><br><span class="line">	    <span class="keyword">if</span>(elements[i].equals(x)) </span><br><span class="line">              <span class="keyword">return</span> i;</span><br><span class="line">            <span class="comment">//必须调用equals,不能elements[i] == x</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> -<span class="number">1</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度：</strong></p>
+<p>最少比较次数：1次</p>
+<p>最多比较次数：size次</p>
+<p>平均比较次数：<sup>n+1</sup>&#x2F;<sub>2</sub> </p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/6.png" class="">
+
+<p>这里分析一下，后面就不解释了，就是这里考虑了概率相等，然后用等差数列（1，2，3…）的求和公式</p>
+<h4 id="1-3-4插入操作"><a href="#1-3-4插入操作" class="headerlink" title="1.3.4插入操作"></a>1.3.4插入操作</h4><p><strong>原型：</strong>	void add (int index ,T x)</p>
+<p><strong>作用：</strong>	在顺序表中index位置，插入新的元素x</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/7.png" class="">
+
+<p><strong>过程：</strong></p>
+<p>1.判断index的合法性（rangeCheckForAdd方法）</p>
+<p>2.判断表是否已满</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">ensureCapacity</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123; </span><br><span class="line">    <span class="comment">// overflow-conscious code</span></span><br><span class="line">    <span class="keyword">if</span> (minCapacity - elements.length &gt; <span class="number">0</span>)</span><br><span class="line">        grow(minCapacity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>！！！错误写法：！！！</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">ensureCapacity</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123; </span><br><span class="line">      <span class="comment">// 有溢出则错误</span></span><br><span class="line">    <span class="keyword">if</span> (minCapacity &gt; elements.length)</span><br><span class="line">         grow(minCapacity);</span><br><span class="line"> &#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里分析一下，为什么这里不能这样写，因为这里涉及到一个整数最大值溢出问题，什么呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int elementsLength = Integer.MAX_VALUE;     // 2147483647</span><br><span class="line">int minCapacity = Integer.MAX_VALUE + 100;  // 理论上应该是2147483747，但实际会溢出</span><br><span class="line"></span><br><span class="line">minCapacity = Integer.MAX_VALUE + 100;  // 溢出后变成 -2147483549</span><br><span class="line">elements.length = Integer.MAX_VALUE;    // 2147483647</span><br><span class="line"></span><br><span class="line">// 比较：-2147483549 &gt; 2147483647 ？ false！</span><br><span class="line">// 结果：不会调用grow()，但实际需要扩容！</span><br></pre></td></tr></table></figure>
+
+<p>然后呢？这里有一个简单点拓展</p>
+<p>​	如果a &gt; 0，并且a 的值&#x3D;Byte.MAX_VALUE，则a + 1 &lt; 0；</p>
+<p>​	如果a &lt; 0，并且a 的值&#x3D;Byte.MIN_VALUE，则a - 1 &gt; 0；</p>
+<p>​	byte的范围 -128～127</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span> &#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">		System.out.println(Byte.MAX_VALUE);	<span class="comment">//127</span></span><br><span class="line">		System.out.println((<span class="type">byte</span>)(Byte.MAX_VALUE + <span class="number">1</span>));	<span class="comment">//-128</span></span><br><span class="line">		System.out.println((<span class="type">byte</span>)(Byte.MAX_VALUE + <span class="number">3</span>));	<span class="comment">//-126</span></span><br><span class="line">		System.out.println();</span><br><span class="line">	</span><br><span class="line">		System.out.println(Byte.MIN_VALUE);	<span class="comment">//-128</span></span><br><span class="line">		System.out.println((<span class="type">byte</span>)(Byte.MIN_VALUE - <span class="number">1</span>));	<span class="comment">//127</span></span><br><span class="line">		System.out.println((<span class="type">byte</span>)(Byte.MIN_VALUE - <span class="number">3</span>));	<span class="comment">//125</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>至于什么原理，就是二进制用补码进行运算时，多出那一位，溢出造成的加减号位（最高位）变号</p>
+<p>接着，要分析grow方法了</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MAX_ARRAY_SIZE</span> <span class="operator">=</span> Integer.MAX_VALUE - <span class="number">8</span>;</span><br><span class="line"><span class="comment">/* 这里为什么要减8，原因就是:</span></span><br><span class="line"><span class="comment">在JVM中，每个对象都有对象头（Object Header），包含：</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Mark Word：哈希码、GC年龄、锁状态等（通常8字节）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">Class Pointer：指向类元数据的指针（通常4字节或8字节）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">所以这样写的话，更安全，有的时候，不减的话还会失败</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">grow</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123;</span><br><span class="line">	<span class="comment">// overflow-conscious code</span></span><br><span class="line">	<span class="type">int</span> <span class="variable">oldCapacity</span> <span class="operator">=</span> elements.length;</span><br><span class="line">	<span class="type">int</span> <span class="variable">newCapacity</span> <span class="operator">=</span> oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);	</span><br><span class="line">       <span class="comment">//	这里右移变一半，左移乘以2，原理看二进制</span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">		newCapacity = minCapacity;</span><br><span class="line">	</span><br><span class="line">         <span class="comment">//这里就要判断一下minCapacit是不是大于整形最大值( 2147483647 )</span></span><br><span class="line">	<span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">		newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">	</span><br><span class="line">	elements = Arrays.copyOf(elements, newCapacity);</span><br><span class="line">       <span class="comment">//这里利用了数组复制，将elements复制到newCapacity</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>下面还有hugeCapacity方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> <span class="title function_">hugeCapacity</span><span class="params">(<span class="type">int</span> minCapacity)</span> &#123;</span><br><span class="line">    	 <span class="keyword">if</span> (minCapacity &lt; <span class="number">0</span>) <span class="comment">// overflow</span></span><br><span class="line">        	 <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">OutOfMemoryError</span>();</span><br><span class="line">     <span class="keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ? Integer.MAX_VALUE : MAX_ARRAY_SIZE;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">/* </span></span><br><span class="line"><span class="comment"> 这里就很简单啊,如果这个minCapacity溢出（是一个负数）,就没办法创建int类型的数组，会抛异常</span></span><br><span class="line"><span class="comment"> 否则和MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8相比:</span></span><br><span class="line"><span class="comment"> 如果成立,就创建Integer.MAX_VALUE</span></span><br><span class="line"><span class="comment"> 否则,Integer.MAX_VALUE - 8</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"> </span><br></pre></td></tr></table></figure>
+
+<p>3.向后移动腾出空间</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">native</span> <span class="keyword">void</span> <span class="title function_">arraycopy</span><span class="params">(Object src,  <span class="type">int</span>  srcPos,</span></span><br><span class="line"><span class="params">                                       Object dest, <span class="type">int</span> destPos,</span></span><br><span class="line"><span class="params">                                       <span class="type">int</span> length)</span>;</span><br><span class="line"><span class="comment">//就是从src的srcPos位置复制到dest的destPos位置，长度位length</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>4.赋值</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">elements[index] = x;</span><br></pre></td></tr></table></figure>
+
+<p>5.++size</p>
+<p>数据+1就不说了</p>
+<p>完整调用代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, T x)</span> &#123;</span><br><span class="line">	rangeCheckForAdd(index);</span><br><span class="line">	ensureCapacity(size + <span class="number">1</span>); <span class="comment">//确保有空间存放x</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">//moveBackward(index);</span></span><br><span class="line">	System.arraycopy(elements, index, </span><br><span class="line">                       elements, index + <span class="number">1</span>, size - index);</span><br><span class="line">	elements[index] = x;</span><br><span class="line">	++size;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度：</strong></p>
+<p>这里分析复杂度，问自己几个问题就出来了</p>
+<ul>
+<li><p>在什么情况下，移动次数最少，最少移动次数是多少？</p>
+<p>答：在最后面size位置插入，移动次数为0</p>
+</li>
+<li><p>在什么情况下，移动次数最多，最多移动次数是多少？<br>答：在最前面0号位置插入，移动次数为size</p>
+</li>
+<li><p>在0~size每个位置插入的概率相同的情况下，移动次数的期望值（平均值）是多少？</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/8.png" class=""></li>
+</ul>
+<h4 id="1-3-5删除操作"><a href="#1-3-5删除操作" class="headerlink" title="1.3.5删除操作"></a>1.3.5删除操作</h4><p><strong>原型：</strong>	T remove (int index)</p>
+<p><strong>作用：</strong>	删除listElem[index]的值</p>
+<p><strong>过程：</strong></p>
+<p>1.判断索引号的合法性（rangeCheck方法）</p>
+<p>这个不再多说了，和上面一样</p>
+<p>2.向前移动(覆盖被删除的数据元素)</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/9.png" class="">
+
+<p>这里思路就是直接向前移动覆盖数据，再删除最后一个数据即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">moveForward</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> index; i &lt; size-<span class="number">1</span>; ++i)</span><br><span class="line">		elements[i] = elements[i + <span class="number">1</span>];</span><br><span class="line">       </span><br><span class="line">       elements[size-<span class="number">1</span>] = <span class="literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>3.–size</p>
+<p>数据-1，也不多说了</p>
+<p>完整调用代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line"><span class="keyword">public</span> T <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	rangeCheck(index);</span><br><span class="line">	<span class="type">T</span> <span class="variable">value</span> <span class="operator">=</span> (T) elements[index];</span><br><span class="line">	<span class="comment">// moveForward(index);</span></span><br><span class="line">	System.arraycopy(elements, index + <span class="number">1</span>, </span><br><span class="line">                         elements, index, size - index - <span class="number">1</span>);</span><br><span class="line">	elements[--size] = <span class="literal">null</span>;<span class="comment">// 防止内存泄漏</span></span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>复杂度：</strong></p>
+<p>这里分析复杂度，还是问自己几个问题就出来了</p>
+<ul>
+<li><p>在什么情况下，移动次数最少，最少移动次数是多少？</p>
+<p>答：删除最后面size-1的位置，移动次数为0，直接置空即可</p>
+</li>
+<li><p>在什么情况下，移动次数最多，最多移动次数是多少？<br>答：删除最前面0的位置，移动次数为size-1，再把最后一个元素置空</p>
+</li>
+<li><p>在0~size每个位置插入的概率相同的情况下，移动次数的期望值（平均值）是多少？</p>
+ <img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/10.png" class=""></li>
+</ul>
+<h4 id="1-3-6清空表"><a href="#1-3-6清空表" class="headerlink" title="1.3.6清空表"></a><strong>1.3.6</strong>清空表</h4><p><strong>原型：</strong>	void clear()</p>
+<p><strong>作用：</strong>	删除所有的数据，使线性表成为空表</p>
+<p><strong>过程：</strong></p>
+<ol>
+<li>循环遍历，全部置空</li>
+<li>size&#x3D;0</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; size; i++)</span><br><span class="line">            elements[i] = <span class="literal">null</span>;<span class="comment">// 防止内存泄漏</span></span><br><span class="line">	size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/11.png" class="">
+
+<p><strong>复杂度：</strong></p>
+<p>这里没必要分析了，直接就是n+1次</p>
+<h4 id="1-3-7迭代器"><a href="#1-3-7迭代器" class="headerlink" title="1.3.7迭代器"></a>1.3.7迭代器</h4><p><strong>实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Iterator&lt;T&gt; <span class="title function_">iterator</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Itr</span>(); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">实现 Iterable&lt;T&gt;接口的 iterator()方法</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">返回一个新的 Itr迭代器实例</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">每次调用都返回新的迭代器（游标从0开始）</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Itr</span> <span class="keyword">implements</span> <span class="title class_">Iterator</span>&lt;T&gt;&#123;<span class="comment">// 内部类</span></span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> cursor;<span class="comment">// 下一个数据的下标</span></span><br><span class="line">	<span class="comment">// public Itr() &#123;</span></span><br><span class="line">	<span class="comment">// curPos = 0;</span></span><br><span class="line">	<span class="comment">// &#125;</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> cursor != size;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">	<span class="keyword">public</span> T <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> (T) elements[cursor++];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里不好理解，我找了一个例子，好理解一些</p>
+<p>类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.NoSuchElementException;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 自定义动态数组</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyArrayList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Iterable</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> Object[] elements = <span class="keyword">new</span> <span class="title class_">Object</span>[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">size</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 添加元素</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(T item)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (size &gt;= elements.length) &#123;</span><br><span class="line">            <span class="comment">// 简化：不处理扩容</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        elements[size++] = item;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">size</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> size;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 关键：返回迭代器（创建内部类对象）</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Iterator&lt;T&gt; <span class="title function_">iterator</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Itr</span>();  <span class="comment">// 这里创建内部类实例！</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 内部迭代器类</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Itr</span> <span class="keyword">implements</span> <span class="title class_">Iterator</span>&lt;T&gt; &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="type">int</span> <span class="variable">cursor</span> <span class="operator">=</span> <span class="number">0</span>;  <span class="comment">// 下一个元素的下标</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 判断是否还有下一个元素</span></span><br><span class="line">        <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> cursor &lt; size;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 获取下一个元素</span></span><br><span class="line">        <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">        <span class="keyword">public</span> T <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (!hasNext()) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">NoSuchElementException</span>();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> (T) elements[cursor++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>创建实例</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">// 1. 创建集合并添加数据</span></span><br><span class="line">        MyArrayList&lt;String&gt; fruits = <span class="keyword">new</span> <span class="title class_">MyArrayList</span>&lt;&gt;();</span><br><span class="line">        fruits.add(<span class="string">&quot;苹果&quot;</span>);</span><br><span class="line">        fruits.add(<span class="string">&quot;香蕉&quot;</span>);</span><br><span class="line">        fruits.add(<span class="string">&quot;橙子&quot;</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 2. 使用迭代器遍历（关键）</span></span><br><span class="line">        Iterator&lt;String&gt; iterator = fruits.iterator();  <span class="comment">// ← 这里创建了内部类 Itr 的对象！</span></span><br><span class="line">        </span><br><span class="line">        System.out.println(<span class="string">&quot;遍历结果：&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) &#123;</span><br><span class="line">            <span class="type">String</span> <span class="variable">fruit</span> <span class="operator">=</span> iterator.next();  <span class="comment">// ← 实际调用的是内部类 Itr 的方法！</span></span><br><span class="line">            System.out.println(fruit);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>2025.12.3，ok，这个算是写完了，还是学到了很多东西的，比如遍历，以及溢出判断，扩容等等，就这样明天再见！</p>
+</blockquote>
+<h1 id="Day03"><a href="#Day03" class="headerlink" title="Day03"></a>Day03</h1><blockquote>
+<p>2025.12.4，再不学真的跟不上了，呜呜呜！</p>
+</blockquote>
+<h2 id="任务清单-2"><a href="#任务清单-2" class="headerlink" title="任务清单"></a>任务清单</h2><ol>
+<li><p>线性表的链式实现</p>
+<ol>
+<li>链式结构和单链表的定义</li>
+<li>单链表基本操作的实现</li>
+<li>单链循环表和双向链表</li>
+</ol>
+</li>
+<li><p>顺序存储和链式存储总结</p>
+</li>
+</ol>
+<h2 id="正品开始！"><a href="#正品开始！" class="headerlink" title="正品开始！"></a>正品开始！</h2><h3 id="1-1链式结构和单链表的定义"><a href="#1-1链式结构和单链表的定义" class="headerlink" title="1.1链式结构和单链表的定义"></a>1.1链式结构和单链表的定义</h3><h4 id="1-1-1链式存储结构"><a href="#1-1-1链式存储结构" class="headerlink" title="1.1.1链式存储结构"></a>1.1.1链式存储结构</h4><hr>
+<p>为了表示据元素之间的关系，最直接的方法就是修改数据元素的定义，增加一个引用变量，因此我们用对象之间的引用关系表达数据元素之间的关系来实现链式存储</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="type">char</span> name[];</span><br><span class="line">	<span class="type">int</span> age;</span><br><span class="line">	<span class="type">float</span> height;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="type">char</span> name[];</span><br><span class="line">	<span class="type">int</span> age;</span><br><span class="line">	<span class="type">float</span> height;</span><br><span class="line">	Student next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>引入新的类Node：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">	Student s;</span><br><span class="line">	Node next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于引入变量next的存在，Node的对象之间存在引用关系，因此，借助Node对象之间的显式的前后关系，隐式地表达学生之间的前后关系</p>
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/13.png" class="">
+
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/14.png" class="">
+
+
+
+<h4 id="1-1-2单链表的定义"><a href="#1-1-2单链表的定义" class="headerlink" title="1.1.2单链表的定义"></a>1.1.2单链表的定义</h4><p><strong>规范Node类</strong></p>
+<p>使用泛型</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>&lt;E&gt;&#123;</span><br><span class="line">	E data;</span><br><span class="line">	Node&lt;E&gt; next;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>作用：</p>
+<ol>
+<li>表达任何数据类型E的对象之间的前后关系，达到复用的目的</li>
+<li>E的对象“被装入”了Node对象</li>
+<li>Node对象之间的引用关系，表达了数据元素之间的前后关系</li>
+</ol>
+<p><strong>单链表</strong></p>
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/15.png" class="">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CLinkedList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">IList</span>&lt;T&gt;, Iterable&lt;T&gt;, Cloneable &#123;</span><br><span class="line">		<span class="keyword">private</span> Node&lt;T&gt; head;</span><br><span class="line">		<span class="keyword">private</span> <span class="type">int</span> size;</span><br><span class="line">    </span><br><span class="line">    	CLinkedList()&#123;</span><br><span class="line">         	head = <span class="literal">null</span>;</span><br><span class="line">            size = <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt;&#123;<span class="comment">//内部类</span></span><br><span class="line">		   	T data;</span><br><span class="line">		  	Node&lt;T&gt; next;</span><br><span class="line">		   	Node(T data, Node&lt;T&gt; next)&#123;</span><br><span class="line">				<span class="built_in">this</span>.data = data;</span><br><span class="line">				<span class="built_in">this</span>.next = next;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">//判断线性表是否为空表，判断size == 0，或head == null</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="1-2单链表基本操作的实现"><a href="#1-2单链表基本操作的实现" class="headerlink" title="1.2单链表基本操作的实现"></a>1.2单链表基本操作的实现</h3><h4 id="1-2-1找下一个结点"><a href="#1-2-1找下一个结点" class="headerlink" title="1.2.1找下一个结点"></a>1.2.1找下一个结点</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Node&lt;T&gt; p;</span><br><span class="line">p = head;</span><br><span class="line"></span><br><span class="line">p = p.next; <span class="comment">//往下跳一个</span></span><br></pre></td></tr></table></figure>
+
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/16.png" class="">
+
+
+
+<h4 id="1-2-2取元素操作"><a href="#1-2-2取元素操作" class="headerlink" title="1.2.2取元素操作"></a>1.2.2取元素操作</h4><p>p &#x3D; head;</p>
+<p>index &#x3D; 0; p所指的就是，找下一个结点0次</p>
+<p>index &#x3D; 1;找下一个结点1次</p>
+<p>index &#x3D; 2找下一个结点2次</p>
+<p>需要执行index次找下一个结点的操作：p &#x3D; p.next</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">rangeCheck</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (index &lt; <span class="number">0</span> || index &gt;= size)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IndexOutOfBoundsException</span>(String.valueOf(index));</span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	rangeCheck(index);</span><br><span class="line">	Node&lt;T&gt; p = head;</span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">		p = p.next;</span><br><span class="line">	<span class="keyword">return</span> p.data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-3定位操作"><a href="#1-2-3定位操作" class="headerlink" title="1.2.3定位操作"></a>1.2.3定位操作</h4><p>索引位置好的基本操作为：移动指针，比较值的大小，并计数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf</span><span class="params">(T x)</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (Node&lt;T&gt; p = head; p != <span class="literal">null</span>; p = p.next) &#123;</span><br><span class="line">			<span class="keyword">if</span> (x.equals(p.data)) <span class="comment">//这种表达方式x不能为null		</span></span><br><span class="line">				<span class="keyword">return</span> index;</span><br><span class="line">				++index;</span><br><span class="line">			&#125;</span><br><span class="line">		<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>如果x &#x3D; null &amp;&amp; p &#x3D; null</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> <span class="title function_">indexOf1</span><span class="params">(T x)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (x == <span class="literal">null</span>) &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (Node&lt;T&gt; p = head; p != <span class="literal">null</span>; p = p.next) &#123;</span><br><span class="line">			<span class="keyword">if</span> (p.data == <span class="literal">null</span>)</span><br><span class="line">				<span class="keyword">return</span> index;</span><br><span class="line">			++index;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="type">int</span> <span class="variable">index</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span> (Node&lt;T&gt; p = head; p != <span class="literal">null</span>; p = p.next) &#123;</span><br><span class="line">			<span class="keyword">if</span> (x.equals(p.data))</span><br><span class="line">				<span class="keyword">return</span> index;</span><br><span class="line">			++index;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="1-2-4插入操作"><a href="#1-2-4插入操作" class="headerlink" title="1.2.4插入操作"></a>1.2.4插入操作</h4><ol>
+<li>我们需要先创建一个结点q</li>
+<li>先q.next &#x3D; p.next </li>
+<li>再p.next &#x3D; q （顺序不可颠倒，否则断开连接）</li>
+</ol>
+<p>当index&#x3D;0的时候，需要特殊处理</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, T x)</span> &#123;</span><br><span class="line">	rangeCheckForAdd(index);</span><br><span class="line">	<span class="keyword">if</span> (index == <span class="number">0</span>) &#123;<span class="comment">//没有前驱结点:空表或加入的数据编号为index</span></span><br><span class="line">		head = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;T&gt;(x, head);<span class="comment">// 加入后作为第1个结点</span></span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		Node&lt;T&gt; p = head;</span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index - <span class="number">1</span>; i++)</span><br><span class="line">			p = p.next;</span><br><span class="line">		p.next = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;T&gt;(x, p.next);</span><br><span class="line">	&#125;</span><br><span class="line">	++size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-5删除操作"><a href="#1-2-5删除操作" class="headerlink" title="1.2.5删除操作"></a>1.2.5删除操作</h4><ol>
+<li>找到第index结点的前驱结点p，然后把这个赋值给q，q&#x3D;p</li>
+<li>跳到index结点</li>
+<li>替换，删除即可q.next &#x3D; p.next（注意：首结点没有前驱结点，需要特殊处理）</li>
+<li>最后也要清空内存p.data &#x3D; null; p.next &#x3D;null;</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	rangeCheck(index);<span class="comment">// 空表会抛异常</span></span><br><span class="line">	Node&lt;T&gt; p = head;</span><br><span class="line">	<span class="keyword">if</span> (index == <span class="number">0</span>) &#123;<span class="comment">// 没有前驱结点</span></span><br><span class="line">		head = head.next;</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;<span class="comment">// 有前驱结点</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index - <span class="number">1</span>; i++)</span><br><span class="line">			p = p.next;</span><br><span class="line">		Node&lt;T&gt; q = p;</span><br><span class="line">		p = p.next;</span><br><span class="line">		q.next = p.next;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// p指向待删除结点</span></span><br><span class="line">	<span class="type">T</span> <span class="variable">value</span> <span class="operator">=</span> p.data;</span><br><span class="line">	p.data = <span class="literal">null</span>;<span class="comment">// 帮助GC帮助垃圾回收器(Garbage Collector)回收不再使用的对象，防止内存泄漏</span></span><br><span class="line">	p.next = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">	--size;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-6清空链表"><a href="#1-2-6清空链表" class="headerlink" title="1.2.6清空链表"></a>1.2.6清空链表</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="keyword">while</span> (head != <span class="literal">null</span>) &#123;<span class="comment">// 不断的删除第1个结点</span></span><br><span class="line">		Node&lt;T&gt; q = head;<span class="comment">// q引用待删除的结点</span></span><br><span class="line">		head = head.next;<span class="comment">// 下一个结点</span></span><br><span class="line">		q.data = <span class="literal">null</span>;<span class="comment">// 帮助GC</span></span><br><span class="line">		q.next = <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-7算法复杂性分析"><a href="#1-2-7算法复杂性分析" class="headerlink" title="1.2.7算法复杂性分析"></a>1.2.7算法复杂性分析</h4><ul>
+<li><p>isEmpty: O(1)</p>
+</li>
+<li><p>size: O(1)</p>
+</li>
+<li><p>indexOf: 主要操作是找后继结点和比较。</p>
+<p>位置             0   1   2  3        n - 1</p>
+<p>移动次数     0   1   2  3        n - 1 </p>
+<p>比较次数     1   2   3  4         n</p>
+<p>查找成功：最少0次，最多n - 1次。</p>
+<p>等概率的平均：O(n)</p>
+<p>查找不成功：移动n - 1次，比较n次，O(n)</p>
+</li>
+<li><p>get: 主要操作是找后继结点，O(n)</p>
+</li>
+<li><p>add: 主要操作是找后继结点， O(n)</p>
+</li>
+<li><p>remove: 主要操作是找后继结点，O(n)</p>
+</li>
+</ul>
+<h4 id="1-2-8迭代器"><a href="#1-2-8迭代器" class="headerlink" title="1.2.8迭代器"></a>1.2.8迭代器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Iterator&lt;T&gt; <span class="title function_">iterator</span><span class="params">()</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Itr</span>(); </span><br><span class="line">&#125;</span><br><span class="line">	</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">class</span> <span class="title class_">Itr</span> <span class="keyword">implements</span> <span class="title class_">Iterator</span>&lt;T&gt;&#123;</span><br><span class="line">	<span class="keyword">private</span> Node&lt;T&gt; cursor;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">Itr</span><span class="params">()</span>&#123;</span><br><span class="line">		cursor = head;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasNext</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> cursor != <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">		</span><br><span class="line">	<span class="keyword">public</span> T <span class="title function_">next</span><span class="params">()</span> &#123;</span><br><span class="line">		<span class="type">T</span> <span class="variable">data</span> <span class="operator">=</span> cursor.data;</span><br><span class="line">		cursor = cursor.next;</span><br><span class="line">		<span class="keyword">return</span> data;</span><br><span class="line">	&#125;		</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-9克隆"><a href="#1-2-9克隆" class="headerlink" title="1.2.9克隆"></a>1.2.9克隆</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line"><span class="keyword">private</span> CLinkedList&lt;T&gt; <span class="title function_">superClone</span><span class="params">()</span> &#123;</span><br><span class="line">     <span class="keyword">try</span> &#123;</span><br><span class="line">         <span class="keyword">return</span> (CLinkedList&lt;T&gt;) <span class="built_in">super</span>.clone();</span><br><span class="line">     &#125; <span class="keyword">catch</span> (CloneNotSupportedException e) &#123;</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">InternalError</span>(e);</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> Object <span class="title function_">clone</span><span class="params">()</span> &#123;</span><br><span class="line">	CLinkedList&lt;T&gt; v = superClone();</span><br><span class="line">	<span class="keyword">if</span> (v.first == <span class="literal">null</span>)<span class="comment">// 空表</span></span><br><span class="line">		<span class="keyword">return</span> v;</span><br><span class="line">	<span class="comment">// 复制this的链表，赋予v</span></span><br><span class="line">	v.first = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(first.data, <span class="literal">null</span>);</span><br><span class="line">	<span class="keyword">for</span> (Node&lt;T&gt; p = first.next, q = v.first; p != <span class="literal">null</span>; p = p.next, q = q.next)</span><br><span class="line">		q.next = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(p.data, <span class="literal">null</span>);			</span><br><span class="line">	<span class="keyword">return</span> v;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-10判相等"><a href="#1-2-10判相等" class="headerlink" title="1.2.10判相等"></a>1.2.10判相等</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">this</span> == obj)</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (obj <span class="keyword">instanceof</span> CLinkedList&lt;?&gt;) &#123;</span><br><span class="line">		CLinkedList&lt;?&gt; rhd = (CLinkedList&lt;?&gt;) obj;</span><br><span class="line">		<span class="keyword">if</span> (<span class="built_in">this</span>.size != rhd.size)</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		<span class="keyword">for</span> (Node&lt;?&gt; p = first, q = rhd.first; p != <span class="literal">null</span>; p = p.next, q = q.next) &#123;</span><br><span class="line">			<span class="keyword">if</span> (!p.data.equals(q.data))</span><br><span class="line">				<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1-2-11带头结点的单链表"><a href="#1-2-11带头结点的单链表" class="headerlink" title="1.2.11带头结点的单链表"></a>1.2.11带头结点的单链表</h4><p>我们前面学到的add和remove操作。在0结点的时候都做了特殊处理，为了方便操作，我们也可以为0结点做一个头结点，这样操作起来更方便</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CLinkedListWithHeadNode</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Ilist</span>&lt;T&gt; &#123;</span><br><span class="line">	<span class="keyword">private</span> Node&lt;T&gt; head;</span><br><span class="line">	<span class="type">int</span> size;</span><br><span class="line">	LinkedListWithfirstNode()&#123;</span><br><span class="line">		head= <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(<span class="literal">null</span>, <span class="literal">null</span>);<span class="comment">// 头结点</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">	不带头结点的构造方法</span></span><br><span class="line"><span class="comment">	CLinkedList()&#123;</span></span><br><span class="line"><span class="comment">    	head = null;</span></span><br><span class="line"><span class="comment">        size = 0;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt;&#123;</span><br><span class="line">		T data;</span><br><span class="line">		Node&lt;T&gt; next;</span><br><span class="line">		Node(T data, Node&lt;T&gt; next)&#123;</span><br><span class="line">			<span class="built_in">this</span>.data = data;</span><br><span class="line">			<span class="built_in">this</span>.next = next;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样的话</p>
+<p>get变成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">get</span><span class="params">(<span class="type">int</span> index)</span> &#123;</span><br><span class="line">	rangCheck(index);</span><br><span class="line">	Node&lt;T&gt; p = head.next;<span class="comment">//注意：开始的位置</span></span><br><span class="line">	<span class="comment">// index次</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">		p = p.next;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> p.data;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>add变成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(<span class="type">int</span> index, T x)</span> &#123;<span class="comment">// 对比CLinkedList</span></span><br><span class="line">	rangeCheckForAdd(index);</span><br><span class="line">	<span class="comment">// 找前驱结点</span></span><br><span class="line">	Node&lt;T&gt; p = head; <span class="comment">//注意：开始的位置</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">		p = p.next;</span><br><span class="line">	p.next = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(x, p.next);</span><br><span class="line">	++size;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>remove变成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> T <span class="title function_">remove</span><span class="params">(<span class="type">int</span> index)</span> &#123;<span class="comment">// 对比CLinkedList</span></span><br><span class="line">	rangeCheck(index);</span><br><span class="line">	Node&lt;T&gt; p = head;</span><br><span class="line">	<span class="comment">// 找到index的前驱</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; index; i++)</span><br><span class="line">		p = p.next;<span class="comment">// 循环结束后，p引用待删除结点的前驱</span></span><br><span class="line">	Node&lt;T&gt; q = p.next;<span class="comment">// q引用待删除结点</span></span><br><span class="line">	p.next = q.next;<span class="comment">// 将待删除结点从链表中移除</span></span><br><span class="line">	<span class="type">T</span> <span class="variable">value</span> <span class="operator">=</span> q.data;</span><br><span class="line">	q.data = <span class="literal">null</span>;<span class="comment">// 帮助GC</span></span><br><span class="line">	q.next = <span class="literal">null</span>;</span><br><span class="line">	--size;</span><br><span class="line">	<span class="keyword">return</span> value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>clear变成</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">clear</span><span class="params">()</span> &#123;</span><br><span class="line">	<span class="comment">// 不断删除first引用结点的后继结点，直到剩下头结点</span></span><br><span class="line">	<span class="keyword">while</span> (head.next != <span class="literal">null</span>) &#123;</span><br><span class="line">		Node&lt;T&gt; q = head.next;<span class="comment">// q引用待删除结点</span></span><br><span class="line">		head.next = q.next;<span class="comment">// 将q引用的结点从链表中移除</span></span><br><span class="line">		q.data = <span class="literal">null</span>;<span class="comment">// 帮助GC</span></span><br><span class="line">		q.next = <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	size = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3单循环链表和双向链表"><a href="#1-3单循环链表和双向链表" class="headerlink" title="1.3单循环链表和双向链表"></a>1.3单循环链表和双向链表</h3><h4 id="1-3-1单循环链表"><a href="#1-3-1单循环链表" class="headerlink" title="1.3.1单循环链表"></a>1.3.1单循环链表</h4><p><strong>定义：</strong>	最后一个结点的指针不是空指针，而是指向了头结点</p>
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/17.png" class="">
+
+<p><strong>作用：</strong>	循环单链表可以从任意元素结点出发，找到其他元素结点</p>
+<p><strong>与单链表的区别：</strong></p>
+<ol>
+<li><p>判断空表的条件：</p>
+<p>head.next &#x3D;&#x3D; null 变为 head.next &#x3D;&#x3D; head</p>
+</li>
+<li><p>判断最后一个数据元素的条件：</p>
+<p>p.next &#x3D;&#x3D; null 变为 p.next &#x3D;&#x3D;head</p>
+</li>
+</ol>
+<p><strong>空表：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CircularLinkedListWithfirstNode</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Ilist</span>&lt;T&gt; , Cloneable&#123;</span><br><span class="line">	<span class="keyword">private</span> Node&lt;T&gt; head;</span><br><span class="line">	<span class="type">int</span> size;</span><br><span class="line">	CircularLinkedListWithfirstNode()&#123;</span><br><span class="line">		head = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(<span class="literal">null</span>, <span class="literal">null</span>);</span><br><span class="line">   		head.next = head ;<span class="comment">//循环</span></span><br><span class="line">    	size = <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>另一种形式</strong></p>
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/18.png" class="">
+
+<p>这样的形式有什么好处呢？就是便于两个链表的融合</p>
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/19.png" class="">
+
+<h4 id="1-3-2双向链表"><a href="#1-3-2双向链表" class="headerlink" title="1.3.2双向链表"></a>1.3.2双向链表</h4><p><strong>作用：</strong>	方便定位一个结点的前驱结点和后继结点</p>
+<p><strong>结点形式：</strong></p>
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/20.png" class="">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt; &#123;</span><br><span class="line">       T data;</span><br><span class="line">       Node&lt;T&gt; next;</span><br><span class="line">       Node&lt;T&gt; prev;</span><br><span class="line"></span><br><span class="line">       Node(Node&lt;T&gt; prev, T element, Node&lt;T&gt; next) &#123;</span><br><span class="line">           <span class="built_in">this</span>.data = element;</span><br><span class="line">           <span class="built_in">this</span>.next = next;</span><br><span class="line">           <span class="built_in">this</span>.prev = prev;</span><br><span class="line">       &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/21.png" class="">
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DoublelyLinkedList</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Ilist</span>&lt;T&gt;&#123;</span><br><span class="line">		Node&lt;T&gt; head;</span><br><span class="line">		<span class="type">int</span> size;</span><br><span class="line">    	...<span class="comment">//其他成员方法</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>双向链表的add操作：</p>
+<ol>
+<li>创建新结点newNode</li>
+<li>newNode.prior.next &#x3D; nextNode</li>
+<li>p.prior &#x3D; newNode</li>
+</ol>
+<p>双向链表的remove操作：</p>
+<ol>
+<li>p.next.prior &#x3D; p.peior</li>
+<li>p.prior.next &#x3D; p.next</li>
+</ol>
+<h3 id="2-0顺序存储和链式存储的总结"><a href="#2-0顺序存储和链式存储的总结" class="headerlink" title="2.0顺序存储和链式存储的总结"></a>2.0顺序存储和链式存储的总结</h3><ul>
+<li><p>get的区别:</p>
+<p>顺序存储：随机存储O(1)</p>
+<p>链式存储：顺序存储O(1)</p>
+</li>
+<li><p>add和remove区别都是O(n):</p>
+<p>顺序存储：主要是移动数据</p>
+<p>链式存储：主要是p &#x3D;p.next</p>
+</li>
+<li><p>如果要逐一读取表中所有数据</p>
+<p>顺序存储：for+get</p>
+<p>链式存储：使用迭代器</p>
+</li>
+<li><p>使用范围</p>
+<p>顺序存储适合能预知数据量的场合</p>
+<p>链式存储适合数据量不可预知且变化较大的场合</p>
+</li>
+</ul>
+<h1 id="Day04"><a href="#Day04" class="headerlink" title="Day04"></a>Day04</h1>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lsccc</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/Lsccc.github.io/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/12/03/%E7%A2%8E%E7%9F%A5%E8%AF%86/">碎知识</a>
+            
+            
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/11/17/%E6%9C%AA%E7%9F%A5%E7%9A%84%E8%B7%AF/">未知的路</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Lsccc | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
