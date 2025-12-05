@@ -239,27 +239,131 @@
 <p><strong>方法二：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line">a = a + b; <span class="comment">//a = 12</span></span><br><span class="line">b = a - b; <span class="comment">//b = 5</span></span><br><span class="line">a = a - b; <span class="comment">//a = 7</span></span><br></pre></td></tr></table></figure>
 
-<h1 id=""><a href="#" class="headerlink" title=""></a><!--纸条二--></h1><!--带泛型的接口，带泛型的类，以及实现带泛型接口的泛型类-->
+<h1 id="纸条二"><a href="#纸条二" class="headerlink" title="纸条二"></a>纸条二</h1><p>带泛型的接口，带泛型的类，以及实现带泛型接口的泛型类</p>
+<p><strong>带泛型的接口：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Container</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(T item)</span>;</span><br><span class="line">    T <span class="title function_">get</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>有什么用呢？</p>
+<p>定义一种与具体数据类型无关的、可被多种不同类型安全实现的通用契约（结构）。</p>
+<p><strong>带泛型的类：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Box</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Container</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> T item;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(T item)</span> &#123; <span class="built_in">this</span>.item = item; &#125;</span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123; <span class="keyword">return</span> item; &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>有什么用呢？</p>
+<p>允许我们编写一个与特定数据类型无关的通用类。在创建这个类的实例时，我们再指定它具体要处理哪种类型的数据，从而获得类型安全、消除强制转换，并最大化代码复用</p>
+<p>带泛型的接口只能限制实现接口的类中，接口的那些抽象方法的类型。</p>
+<p>而实现类还可以有除了接口以外的其他方法&#x2F;字段，再用自己的泛型来限制。</p>
+<table>
+<thead>
+<tr>
+<th align="left">场景</th>
+<th align="left">类声明</th>
+<th align="left">接口实现</th>
+<th align="left">是否合规</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left"><code>class C&lt;T&gt;</code></td>
+<td align="left"><code>implements I&lt;T&gt;</code></td>
+<td align="left">✅</td>
+<td align="left">类型参数传递</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left"><code>class C&lt;T,U&gt;</code></td>
+<td align="left"><code>implements I&lt;T&gt;</code></td>
+<td align="left">✅</td>
+<td align="left">部分参数对应</td>
+</tr>
+<tr>
+<td align="left">3</td>
+<td align="left"><code>class C</code></td>
+<td align="left"><code>implements I&lt;String&gt;</code></td>
+<td align="left">✅</td>
+<td align="left">接口类型具体化</td>
+</tr>
+<tr>
+<td align="left">4</td>
+<td align="left"><code>class C&lt;T&gt;</code></td>
+<td align="left"><code>implements I&lt;String&gt;</code></td>
+<td align="left">✅ 但怪</td>
+<td align="left">类的 T 在接口方法中没用上</td>
+</tr>
+<tr>
+<td align="left">5</td>
+<td align="left"><code>class C</code></td>
+<td align="left"><code>implements I</code></td>
+<td align="left">⚠️ 原始类型</td>
+<td align="left">编译器警告，不推荐</td>
+</tr>
+<tr>
+<td align="left">6</td>
+<td align="left"><code>class C&lt;T&gt;</code></td>
+<td align="left"><code>implements I&lt;Number&gt;</code></td>
+<td align="left">✅</td>
+<td align="left">固定为父类型</td>
+</tr>
+</tbody></table>
+<p><strong>泛型的边界</strong></p>
+<p>所有类型</p>
+<ul>
+<li><p>Object</p>
+<ul>
+<li><p>Number</p>
+<ul>
+<li>Integer</li>
+<li>Double</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>为什么泛型需要边界？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Calculator</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">square</span><span class="params">(T num)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> num * num;  <span class="comment">//  编译错误！</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>T可能是 String、Dog，它们不能做乘法。因此，我们需要告诉编译器：“T必须是数字类型”。</p>
+<p>如何实现接口边界？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Container</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现1：用具体类型</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IntegerContainer</span> <span class="keyword">implements</span> <span class="title class_">Container</span>&lt;Integer&gt; &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现2：保持泛型，但必须满足接口边界</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NumberContainer</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; <span class="keyword">implements</span> <span class="title class_">Container</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="comment">// 注意：这里类的T边界要 &gt;= 接口的T边界</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现3：边界不兼容</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AnyContainer</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Container</span>&lt;T&gt; &#123; ... &#125;  </span><br><span class="line"><span class="comment">// 错误！接口要求T extends Number，但类的T没约束</span></span><br></pre></td></tr></table></figure>
+
+<p>这个实现3为什么不对？</p>
+<p>编译器无法保证 Container <String>是合法的（因为 String不是 Number子类）。正确做法就是，要么实现类的泛型边界和接口一致，要么比接口更加严谨</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确1：类的边界与接口相同</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">NumberContainer</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Number</span>&gt; <span class="keyword">implements</span> <span class="title class_">Container</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">store</span><span class="params">(T item)</span> &#123; ... &#125;  <span class="comment">// T一定是Number子类</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确2：类的边界比接口更严格</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">IntegerContainer</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Integer</span>&gt; <span class="keyword">implements</span> <span class="title class_">Container</span>&lt;T&gt; &#123;  </span><br><span class="line">    <span class="comment">// T extends Integer 比 T extends Number 更严格</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">store</span><span class="params">(T item)</span> &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<!--**带泛型的接口：**-->
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义一个泛型仓库接口</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Repository</span>&lt;T, ID&gt; &#123;</span><br><span class="line"> 	  	<span class="keyword">void</span> <span class="title function_">save</span><span class="params">(T entity)</span>;</span><br><span class="line"> 	 	T <span class="title function_">findById</span><span class="params">(ID id)</span>;</span><br><span class="line">   	<span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(ID id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<!--有什么用呢？-->
-
-<!--定义一种与具体数据类型无关的、可被多种不同类型安全实现的通用契约。-->
+<p>那实现类岂不是不能有其他类型的泛型类了？</p>
+<p>不是的，还可以有自己的泛型，并且多个泛型，要用“，”隔开</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">AnimalHouse</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Animal</span>&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">letIn</span><span class="params">(T animal)</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现类有额外泛型参数</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">SmartHouse</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Animal</span>, ID&gt; <span class="keyword">implements</span> <span class="title class_">AnimalHouse</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> ID houseId;           <span class="comment">// 额外泛型字段</span></span><br><span class="line">    <span class="keyword">private</span> Map&lt;ID, T&gt; residents; <span class="comment">// 用两个泛型   </span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
 
-<!--**带泛型的类：**-->
+<p>那如何实现多重边界？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 必须找到T满足所有边界</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Stable</span>&lt;T <span class="keyword">extends</span> <span class="title class_">Animal</span> &amp; LivingBeing&gt; <span class="keyword">implements</span> <span class="title class_">Movable</span>&lt;T&gt;, Feedable&lt;T&gt; &#123; ... &#125;</span><br><span class="line"><span class="comment">// 这里T必须是Animal子类且是LivingBeing实现类</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 泛型类 Box&lt;T&gt;</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Box</span>&lt;T&gt; &#123;</span><br><span class="line">   	<span class="keyword">private</span> T value;</span><br><span class="line">   </span><br><span class="line">   	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">set</span><span class="params">(T value)</span> &#123;</span><br><span class="line">       	<span class="built_in">this</span>.value = value;</span><br><span class="line">   	&#125;</span><br><span class="line">   </span><br><span class="line">   	<span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">       	<span class="keyword">return</span> value;</span><br><span class="line">   	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>用“&amp;”连接进行连结</p>
+<p>那如何定义下界呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 错误：不能在定义泛型类型参数时用下界</span><br><span class="line">class Box&lt;T super Number&gt; &#123; ... &#125;  // 编译错误！</span><br><span class="line">interface Container&lt;T super String&gt; &#123; ... &#125;  // 编译错误！</span><br><span class="line"></span><br><span class="line">// 正确：只能在通配符中使用下界</span><br><span class="line">List&lt;? super Integer&gt; list;  // 可以：必须是Integer的父类</span><br><span class="line">Box&lt;? super Number&gt; box;     // 可以：必须是Number的父类</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<!--有什么用呢？-->
+<p>而且取出来的数据，可以是Object</p>
+<p>为什么取出来是Object？</p>
+<p>因为 ? super Number可能是 Number、Object或 Serializable等，编译器只知道它是Number的父类，但不确定具体是哪个父类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;? <span class="built_in">super</span> Integer&gt; list;</span><br><span class="line"><span class="comment">// list可以是：</span></span><br><span class="line">list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Integer&gt;();  <span class="comment">// Integer本身</span></span><br><span class="line">list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Number&gt;();   <span class="comment">// Number是Integer父类</span></span><br><span class="line">list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Object&gt;();   <span class="comment">// Object是Integer父类</span></span><br><span class="line">list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Serializable&gt;(); <span class="comment">// Serializable是Integer实现的接口</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// list不能是：</span></span><br><span class="line">list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();   <span class="comment">// String不是Integer父类</span></span><br><span class="line">list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;Double&gt;();   <span class="comment">// Double不是Integer父类</span></span><br></pre></td></tr></table></figure>
 
-<!--允许我们编写一个与特定数据类型无关的通用类。在创建这个类的实例时，我们再指定它具体要处理哪种类型的数据，从而获得类型安全、消除强制转换，并最大化代码复用-->
+
+
+<p>然后要说的就是泛型接口多态的一个内容</p>
+<p>一定要记住，泛型不支持协变，什么意思呢？，看例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Box</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">StringBox</span> <span class="keyword">implements</span> <span class="title class_">Box</span>&lt;String&gt; &#123; ... &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GenericBox</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Box</span>&lt;T&gt; &#123; ... &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用：</span></span><br><span class="line">Box&lt;String&gt; box1 = <span class="keyword">new</span> <span class="title class_">StringBox</span>();          <span class="comment">// 正确</span></span><br><span class="line">Box&lt;String&gt; box2 = <span class="keyword">new</span> <span class="title class_">GenericBox</span>&lt;String&gt;(); <span class="comment">//	正确</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误：泛型类型不匹配</span></span><br><span class="line">Box&lt;String&gt; box3 = <span class="keyword">new</span> <span class="title class_">GenericBox</span>&lt;Integer&gt;();  <span class="comment">// 编译错误！</span></span><br></pre></td></tr></table></figure>
+
+<p>但是我们也可以进行模拟协变</p>
+<p>模拟协变的唯一方法：? extends</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义继承关系</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Animal</span> &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Dog</span> <span class="keyword">extends</span> <span class="title class_">Animal</span> &#123;&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Cat</span> <span class="keyword">extends</span> <span class="title class_">Animal</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 问题：泛型不变性</span></span><br><span class="line">List&lt;Dog&gt; dogs = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="comment">// List&lt;Animal&gt; animals = dogs;  // 编译错误！</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 解决方案：上界通配符（模拟协变）</span></span><br><span class="line">List&lt;? <span class="keyword">extends</span> <span class="title class_">Animal</span>&gt; animals = dogs;  <span class="comment">// 正确</span></span><br><span class="line"><span class="comment">// 现在 animals 可以引用 List&lt;Dog&gt;、List&lt;Cat&gt;、List&lt;Animal&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>终于结束了</p>
+</blockquote>
+
         </div>
 
         
@@ -311,7 +415,7 @@
         <section class="post-nav">
             
             
-            <a class="next" rel="next" href="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/">数据结构</a>
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/11/28/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E8%B7%AF/">码林秘籍</a>
             
         </section>
 
