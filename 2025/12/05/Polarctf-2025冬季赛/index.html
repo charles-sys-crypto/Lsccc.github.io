@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lsccc">
+
+
+
+
+
+<title>Polarctf-2025冬季赛 | Lsccc</title>
+
+
+
+    <link rel="icon" href="/Lsccc.github.io/icon.svg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/Lsccc.github.io/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/Lsccc.github.io/js/script.js"></script>
+    
+    <script src="/Lsccc.github.io/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">Polarctf-2025冬季赛</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Lsccc</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 5, 2025&nbsp;&nbsp;22:57:06</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/Lsccc.github.io/categories/Competitions/">Competitions</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>2025.12.6，12月份第一场比赛，秋天没打好的，冬天加油！</p>
+</blockquote>
+<h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="Source-of-danger-1"><a href="#Source-of-danger-1" class="headerlink" title="Source of danger 1"></a><strong>Source of danger 1</strong></h2> <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/1.png" class="">
+
+<p>flag{192.168.27.15}</p>
+<h2 id="Source-of-danger-3"><a href="#Source-of-danger-3" class="headerlink" title="Source of danger 3"></a><strong>Source of danger 3</strong></h2><p>题目中说图片138_thumb_G_1763621518921.jpg，然后提取出来</p>
+ <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/2.png" class="">
+
+<p>flag{ChatGPT}</p>
+<h2 id="Source-of-danger-4"><a href="#Source-of-danger-4" class="headerlink" title="Source of danger 4"></a><strong>Source of danger 4</strong></h2><p>根据提示，找脚本，然后看到一个upload.php</p>
+ <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/3.png" class="">
+
+ <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/4.png" class="">
+
+<p>flag{2.32.5}</p>
+<h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h2 id="uii"><a href="#uii" class="headerlink" title="uii"></a>uii</h2><p>打开靶机，查看源代码</p>
+ <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/5.png" class="">
+
+<p>发现咖啡种类是 拿铁</p>
+<p>输入后进入源代码</p>
+<p>然后分析得到?uii&#x3D;Yzz</p>
+ <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/6.png" class="">
+
+<p>flag:{23dhw38wr98034dfz}</p>
+<h2 id="PolarShop"><a href="#PolarShop" class="headerlink" title="PolarShop"></a>PolarShop</h2><p>打开靶机，修改源代码，添加点$</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/7.png" class="">
+
+<p> 然后，购买账单，得到一个shop bill.txt字典，目录扫描就会发现，有一个admin.php页面</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/8.png" class=""> 
+
+<p>访问admin，果然是一个登入页面</p>
+<p>再结合管理员才能查看信息，查看账单Squirtle，然后字典爆破</p>
+<p>用户名：Squirtle</p>
+<p>密码：5qu1rtle</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/9.png" class="">
+
+<p> 分析代码，post传参action&#x3D; view_secret</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/10.png" class="">
+
+<p>然后在浏览器中打开，修改cookie</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/11.png" class="">
+
+<p>点开就有了</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/12.png" class="">
+
+<p> flag{d104c607a29d48eb99f2eece12281a7f}</p>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="xiaoji的RSA"><a href="#xiaoji的RSA" class="headerlink" title="xiaoji的RSA"></a>xiaoji的RSA</h2><p>题目：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">from</span> flag <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">m1 = libnum.s2n(flag[:<span class="number">21</span>])</span><br><span class="line">m2 = libnum.s2n(flag[<span class="number">21</span>:])</span><br><span class="line">p = libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">q = libnum.generate_prime(<span class="number">1024</span>)</span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line">n = p * q</span><br><span class="line">h1 = <span class="built_in">pow</span>(<span class="number">2025</span> * p + <span class="number">2024</span> * q, <span class="number">7717</span>, n)</span><br><span class="line">h2 = <span class="built_in">pow</span>(<span class="number">2024</span> * p + <span class="number">2025</span> * q, <span class="number">8859</span>, n)</span><br><span class="line">c1 = <span class="built_in">pow</span>(m1, e, n)</span><br><span class="line">c2 = <span class="built_in">pow</span>(m2, e, n)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;h1=&quot;</span>, h1)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;h2=&quot;</span>, h2)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;n=&quot;</span>, n)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;c=&quot;</span>, (c1 + c2))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;leak=&quot;</span>, (c1 * <span class="number">2</span> - c2))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#output</span></span><br><span class="line"><span class="comment"># h1 = 14598570770570369251044298637863318854969244053819114954671895416691350802920687681668270301378543649113252159681469894140327953343981428435557763783575047421073785093934100988516182011757805151301552786226747639175213248064364104458391503594386384710007637410647669428289271030281975860741433987188926890687769189330536656978907095466736760156091550669274865538908426382007469741745093518762985240171234021436305408209014615992584706412209748494302146308826117702351113891442300797965409831595569786933763773967575744129781374727612526423706127336276048951135368854093017991855415497273999713365969103371554004824509</span></span><br><span class="line"><span class="comment"># h2 = 11655430400126708521266628893465012008156070100550313215125940102411494976112918677189030755406554269846801368688286768397687408859238412058773272768466345174217960738213084397497134648104645110774595383007722678343723326165844773931623583737649558732929341710652376370393000666923877685083880991816166675473675993119565288119886891401337292448811477124318462203416303782364411201690259713617106545395093938159021072322598644028525378190756212177234492649667270787158675885995463312527798325191816554894434526912762675422186788558909636033206644624947398671285555871818986699430277747968998624440765160214625508302582</span></span><br><span class="line"><span class="comment"># n = 16117539256891249484718413429700173002583084988861340273782389608188420881800342876872775121756821301056788500260045796850939585388076522939011021777251658702207624594144564384121357888401608404641571728859619754015070281985119363898471820577703197516678288716301039869441770173970562352919565912788016889342101896134309321994797037369608180360632790282197647969119609543804552490560372790883065970972189091831856508916272396614853136857081227250153104695845022919856333090412792344985816893032033703744649648621089458783293225651830841418574525258165458710362104364949367148707705685722700758399918195168711661909001</span></span><br><span class="line"><span class="comment"># c = 18062960292926203405106631570645792887346762710596094595946201638145269792362432970619678514073768330282072122297774770846723026262793638145140252714036118255298935496782643261099997757452005888950084317572578983859160308143219449311014720216597693717833093096186064214815571678655104145532183363580096161113659794514705540535423432576540755810113817779577012494191762397204056012915596163266097092210799790994886142736276356044755057247863118120000651380079123033610186723297866795705886993017274323290850712391555552018597217459748407996232225971214252337750534257640641166056960137653051788480104937847471213865531</span></span><br><span class="line"><span class="comment"># leak = 29786109562795434767286575222202920392934698151772733519827029723076564127577506924725472620552207928305324807071633980845799428305323747287497587012814817694240321762385052643719779704776885137653915759833442842418374852111545817139388092965791383085268376283252367393215830021523854878152740193684532064211244526477475872824124551317767515936013314015487953976823909663377712672258700701049790904432754196590520755614551428222850284265995888579989169357385240073615572407415594868320441237551194011351100321407974631166974196395240849462596136681294133772802147270429624576958515766511950802469230517874955000694776</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> libnum</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> gcd</span><br><span class="line"></span><br><span class="line"><span class="comment"># Given values</span></span><br><span class="line">h1 = <span class="number">14598570770570369251044298637863318854969244053819114954671895416691350802920687681668270301378543649113252159681469894140327953343981428435557763783575047421073785093934100988516182011757805151301552786226747639175213248064364104458391503594386384710007637410647669428289271030281975860741433987188926890687769189330536656978907095466736760156091550669274865538908426382007469741745093518762985240171234021436305408209014615992584706412209748494302146308826117702351113891442300797965409831595569786933763773967575744129781374727612526423706127336276048951135368854093017991855415497273999713365969103371554004824509</span></span><br><span class="line">h2 = <span class="number">11655430400126708521266628893465012008156070100550313215125940102411494976112918677189030755406554269846801368688286768397687408859238412058773272768466345174217960738213084397497134648104645110774595383007722678343723326165844773931623583737649558732929341710652376370393000666923877685083880991816166675473675993119565288119886891401337292448811477124318462203416303782364411201690259713617106545395093938159021072322598644028525378190756212177234492649667270787158675885995463312527798325191816554894434526912762675422186788558909636033206644624947398671285555871818986699430277747968998624440765160214625508302582</span></span><br><span class="line">n = <span class="number">16117539256891249484718413429700173002583084988861340273782389608188420881800342876872775121756821301056788500260045796850939585388076522939011021777251658702207624594144564384121357888401608404641571728859619754015070281985119363898471820577703197516678288716301039869441770173970562352919565912788016889342101896134309321994797037369608180360632790282197647969119609543804552490560372790883065970972189091831856508916272396614853136857081227250153104695845022919856333090412792344985816893032033703744649648621089458783293225651830841418574525258165458710362104364949367148707705685722700758399918195168711661909001</span></span><br><span class="line">c = <span class="number">18062960292926203405106631570645792887346762710596094595946201638145269792362432970619678514073768330282072122297774770846723026262793638145140252714036118255298935496782643261099997757452005888950084317572578983859160308143219449311014720216597693717833093096186064214815571678655104145532183363580096161113659794514705540535423432576540755810113817779577012494191762397204056012915596163266097092210799790994886142736276356044755057247863118120000651380079123033610186723297866795705886993017274323290850712391555552018597217459748407996232225971214252337750534257640641166056960137653051788480104937847471213865531</span></span><br><span class="line">leak = <span class="number">29786109562795434767286575222202920392934698151772733519827029723076564127577506924725472620552207928305324807071633980845799428305323747287497587012814817694240321762385052643719779704776885137653915759833442842418374852111545817139388092965791383085268376283252367393215830021523854878152740193684532064211244526477475872824124551317767515936013314015487953976823909663377712672258700701049790904432754196590520755614551428222850284265995888579989169357385240073615572407415594868320441237551194011351100321407974631166974196395240849462596136681294133772802147270429624576958515766511950802469230517874955000694776</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">e = <span class="number">0x10001</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 1: recover c1, c2</span></span><br><span class="line">inv3 = libnum.invmod(<span class="number">3</span>, n)</span><br><span class="line">c1 = (leak + c) * inv3 % n</span><br><span class="line">c2 = (c - c1) % n</span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 2: factor n using h1, h2</span></span><br><span class="line">K = <span class="number">7717</span> * <span class="number">8859</span>  <span class="comment"># 68364903</span></span><br><span class="line"></span><br><span class="line">X = <span class="built_in">pow</span>(h1, <span class="number">8859</span>, n)  <span class="comment"># A^K mod n</span></span><br><span class="line">Y = <span class="built_in">pow</span>(h2, <span class="number">7717</span>, n)  <span class="comment"># B^K mod n</span></span><br><span class="line"></span><br><span class="line">term1 = <span class="built_in">pow</span>(<span class="number">2025</span>, K, n) * Y % n</span><br><span class="line">term2 = <span class="built_in">pow</span>(<span class="number">2024</span>, K, n) * X % n</span><br><span class="line"></span><br><span class="line">Z = (term1 - term2) % n</span><br><span class="line">q = gcd(Z, n)</span><br><span class="line">p = n // q</span><br><span class="line"></span><br><span class="line"><span class="comment"># Step 3: decrypt</span></span><br><span class="line">phi = (p-<span class="number">1</span>)*(q-<span class="number">1</span>)</span><br><span class="line">d = libnum.invmod(e, phi)</span><br><span class="line"></span><br><span class="line">m1 = <span class="built_in">pow</span>(c1, d, n)</span><br><span class="line">m2 = <span class="built_in">pow</span>(c2, d, n)</span><br><span class="line"></span><br><span class="line">flag = libnum.n2s(m1) + libnum.n2s(m2)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>b’flag{fc08e137-5be9-4677-a1f5-4e640223df0e}’</p>
+<h2 id="EzAES"><a href="#EzAES" class="headerlink" title="EzAES"></a>EzAES</h2><p>题目：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">k = <span class="number">54686973497341555331323435363638</span></span><br><span class="line">IV = 496E697469616C697A6174696F6E2056</span><br><span class="line">c = ae4ff1ccc900eb0ba99857c297cf0b73</span><br><span class="line"><span class="comment">#得到的答案进行MD5的32位小写加密以获得flag</span></span><br></pre></td></tr></table></figure>
+
+<p>Exp：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> AES</span><br><span class="line"><span class="keyword">from</span> Crypto.Util.Padding <span class="keyword">import</span> unpad</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">k_hex = <span class="string">&quot;54686973497341555331323435363638&quot;</span></span><br><span class="line">key = <span class="built_in">bytes</span>.fromhex(k_hex)</span><br><span class="line">IV = <span class="built_in">bytes</span>.fromhex(<span class="string">&quot;496E697469616C697A6174696F6E2056&quot;</span>)</span><br><span class="line">c = <span class="built_in">bytes</span>.fromhex(<span class="string">&quot;ae4ff1ccc900eb0ba99857c297cf0b73&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Try CBC</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cipher = AES.new(key, AES.MODE_CBC, IV)</span><br><span class="line">    plain = unpad(cipher.decrypt(c), <span class="number">16</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;CBC success:&quot;</span>, plain)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;MD5:&quot;</span>, hashlib.md5(plain).hexdigest())</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">Pass</span><br><span class="line"></span><br><span class="line"><span class="comment"># Try ECB</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    cipher = AES.new(key, AES.MODE_ECB)</span><br><span class="line">    plain = unpad(cipher.decrypt(c), <span class="number">16</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;ECB success:&quot;</span>, plain)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;MD5:&quot;</span>, hashlib.md5(plain).hexdigest())</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">CBC success: b&#x27;polarctf666&#x27;</span></span><br><span class="line"><span class="string">MD5: 3f234da2fe6e8c189048e522b18fefed</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="comment">#flag&#123;3f234da2fe6e8c189048e522b18fefed&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="PWN"><a href="#PWN" class="headerlink" title="PWN"></a>PWN</h1><h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1>
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lsccc</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/Lsccc.github.io/tags/2025-12/"># 2025-12</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/Lsccc.github.io/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/03/%E7%A2%8E%E7%9F%A5%E8%AF%86/">碎知识</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Lsccc | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
