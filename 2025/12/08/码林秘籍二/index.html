@@ -238,16 +238,13 @@
 <h3 id="1-2二叉树的基本性质"><a href="#1-2二叉树的基本性质" class="headerlink" title="1.2二叉树的基本性质"></a>1.2二叉树的基本性质</h3><p><strong>性质1：在二叉树的第i层上至多有2<sup>i</sup>个结点（i &gt;&#x3D;0）</strong></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/1.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\1.png" alt="1765204789161"></p>
 <p><strong>证明：</strong></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/2.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\2.png" alt="1765204933040"></p>
 <p><strong>性质2：深度为k的二叉树上最多有 2<sup>k</sup> - 1个数据，k ≥ 1。</strong></p>
 <p><strong>证明：</strong></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/3.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\3.png" alt="1765205175394"></p>
 <p><strong>性质3：若二叉树有n<sub>0</sub>个叶子、n<sub>2</sub>个度为2的数据，则必存在关系式：n<sub>0</sub> &#x3D; n<sub>2</sub> + 1。</strong>  </p>
 <p><strong>证明：</strong></p>
 <ol>
@@ -262,39 +259,30 @@
 <p>上取整</p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/4.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\4.png" alt="1765205965697"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/5.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\5.png" alt="1765206013227"></p>
 <p>下取整</p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/6.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\6.png" alt="1765206173794"></p>
 <p><strong>性质 5：对有n个数据的完全二叉树像图那样编号，则编号为i的数据与双亲和孩子的编号之间具有以下关系：</strong></p>
 <ol>
 <li><strong>若i &#x3D; 0，则编号为i的数据是根，无双亲。否则，双亲的编号为⌊(i−1) &#x2F; 2⌋。下取整</strong></li>
 <li><strong>若2i + 1 ≥ n，则编号为i的数据无左孩子，否则，左孩子的编号为2i + 1。</strong></li>
 <li><strong>若2i + 2 ≥ n，则编号为i的数据无右孩子，否则，右孩子的编号为2i + 2。</strong></li>
 </ol>
- <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/7.png" class="">
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/7.png" class=""> 
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\7.png" alt="1765206401454"> </p>
 <p><strong>证明：</strong></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/8.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\8.png" alt="1765206557126"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/9.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\9.png" alt="1765206920669"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/10.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\10.png" alt="1765206944439"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/11.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\11.png" alt="1765206966055"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/12.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\12.png" alt="1765207060357"></p>
 <h3 id="1-3二叉树的存储结构"><a href="#1-3二叉树的存储结构" class="headerlink" title="1.3二叉树的存储结构"></a>1.3二叉树的存储结构</h3><h4 id="1-3-1二叉树的顺序存储结构"><a href="#1-3-1二叉树的顺序存储结构" class="headerlink" title="1.3.1二叉树的顺序存储结构"></a>1.3.1二叉树的顺序存储结构</h4><ul>
 <li>数组描述除了存储数据，还需要存储双亲&#x2F;孩子关系。</li>
 <li>对完全二叉树，在数据编号和数组下标之间建立对应关系，即0号数据存储于下标为0的数组元素，1号数据存储于下标为1的数组元素，…，以此类推。</li>
@@ -302,22 +290,18 @@
 </ul>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/13.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\13.png" alt="1765207360803"></p>
 <p>但是要想实现数组存储，要求必须是完全二叉树，那一般的二叉树怎么办呢？</p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/14.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\14.png" alt="1765207566316"></p>
 <p>我们可以想象成完全二叉树，也就是说我们可以补充虚拟数据</p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/15.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\15.png" alt="1765207654596"></p>
 <p><strong>实现：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">sqBinaryTree</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> Object[] data;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">sqBinaryTree</span><span class="params">(<span class="type">int</span> maxSize)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (maxSize &lt;= <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(String.valueOf(maxSize));</span><br><span class="line">        data = <span class="keyword">new</span> <span class="title class_">Object</span>[maxSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>这样存储的话，null会白白浪费很多空间</p>
 <h4 id="1-3-2二叉树的链式存储结构"><a href="#1-3-2二叉树的链式存储结构" class="headerlink" title="1.3.2二叉树的链式存储结构"></a>1.3.2二叉树的链式存储结构</h4> <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/16.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\16.png" alt="1765208107689"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt; &#123;</span><br><span class="line">	T data;</span><br><span class="line">	Node&lt;T&gt; left;</span><br><span class="line">	Node&lt;T&gt; right;</span><br><span class="line"></span><br><span class="line">	Node(T data, Node&lt;T&gt; left, Node&lt;T&gt; right) &#123;</span><br><span class="line">		<span class="built_in">this</span>.data = data;</span><br><span class="line">		<span class="built_in">this</span>.left = left;</span><br><span class="line">		<span class="built_in">this</span>.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>二叉树实现</p>
@@ -328,23 +312,18 @@
 <p><strong>三叉结构：</strong></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/17.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\17.png" alt="1765208361517"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/18.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\18.png" alt="1765208421739"></p>
 <p>实现：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt; &#123;</span><br><span class="line">	T data;</span><br><span class="line">	Node&lt;T&gt; parent;</span><br><span class="line">	Node&lt;T&gt; left;</span><br><span class="line">	Node&lt;T&gt; right;</span><br><span class="line">	Node(Tdata, Node&lt;T&gt; parent , Node&lt;T&gt; left, Node&lt;T&gt; right) &#123;</span><br><span class="line">		<span class="built_in">this</span>.data = data;</span><br><span class="line">		<span class="built_in">this</span>.parent = parent;</span><br><span class="line">		<span class="built_in">this</span>.left = left;</span><br><span class="line">		<span class="built_in">this</span>.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/19.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\19.png" alt="1765208568045"></p>
 <p><strong>双亲链表：</strong></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/20.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\20.png" alt="1765208667500"></p>
  <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/21.png" class="">
 
-<p><img src="E:\Blog\source_posts\码林秘籍二\21.png" alt="1765208817643"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 结点结构</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BPTNode</span>&lt;T&gt; &#123;</span><br><span class="line">    T data;</span><br><span class="line">    <span class="type">int</span> parent; <span class="comment">// 指向双亲的指针</span></span><br><span class="line">    <span class="type">char</span> LRTag; <span class="comment">// 左、右孩子标志域</span></span><br><span class="line">    </span><br><span class="line">    ......成员方法</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 树结构</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BPTree</span>&lt;T&gt; &#123;</span><br><span class="line">    BPTNode nodes[];</span><br><span class="line">    <span class="type">int</span> num_node; <span class="comment">// 结点数目</span></span><br><span class="line">    <span class="type">int</span> root; <span class="comment">// 根结点的位置</span></span><br><span class="line">    </span><br><span class="line">    ......成员方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <blockquote>
