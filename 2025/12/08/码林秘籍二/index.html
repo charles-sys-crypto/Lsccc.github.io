@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Lsccc">
+
+
+
+
+
+<title>码林秘籍(二) | Lsccc</title>
+
+
+
+    <link rel="icon" href="/Lsccc.github.io/icon.svg">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/Lsccc.github.io/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/Lsccc.github.io/js/script.js"></script>
+    
+    <script src="/Lsccc.github.io/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/Lsccc.github.io/">Lsccc&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/Lsccc.github.io/archives">Posts</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/category">Categories</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/tag">Tags</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/about">About</a>
+                
+                <a class="menu-item" href="/Lsccc.github.io/link">Links</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">码林秘籍(二)</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Lsccc</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十二月 8, 2025&nbsp;&nbsp;22:33:17</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/Lsccc.github.io/categories/knowledges/">knowledges</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <blockquote>
+<p>还是新博客好啊，哪个卡死了，一个小时还写的不到1000字，好了接上回</p>
+</blockquote>
+<h3 id="1-2二叉树的基本性质"><a href="#1-2二叉树的基本性质" class="headerlink" title="1.2二叉树的基本性质"></a>1.2二叉树的基本性质</h3><p><strong>性质1：在二叉树的第i层上至多有2<sup>i</sup>个结点（i &gt;&#x3D;0）</strong></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/1.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\1.png" alt="1765204789161"></p>
+<p><strong>证明：</strong></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/2.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\2.png" alt="1765204933040"></p>
+<p><strong>性质2：深度为k的二叉树上最多有 2<sup>k</sup> - 1个数据，k ≥ 1。</strong></p>
+<p><strong>证明：</strong></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/3.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\3.png" alt="1765205175394"></p>
+<p><strong>性质3：若二叉树有n<sub>0</sub>个叶子、n<sub>2</sub>个度为2的数据，则必存在关系式：n<sub>0</sub> &#x3D; n<sub>2</sub> + 1。</strong>  </p>
+<p><strong>证明：</strong></p>
+<ol>
+<li>设二叉树上结点总数：n &#x3D; n<sub>0</sub> + n<sub>1</sub> + n<sub>2</sub></li>
+<li>设二叉树上分支总数为b，由树的性质：n &#x3D; b + 1</li>
+<li>然后根据结点和分支的关系，b &#x3D; n<sub>1</sub> + 2n<sub>2</sub></li>
+<li>所以n &#x3D; n<sub>1</sub> + 2n<sub>2</sub> + 1</li>
+<li>联立1和4，得到 n<sub>0</sub> &#x3D; n<sub>2</sub> + 1</li>
+</ol>
+<p><strong>性质4：有n个结点的完全二叉树的深度为⌈log<sub>2</sub>n + 1⌉或 ⌊log<sub>2</sub>n ⌋+1</strong></p>
+<p><strong>证明：</strong></p>
+<p>上取整</p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/4.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\4.png" alt="1765205965697"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/5.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\5.png" alt="1765206013227"></p>
+<p>下取整</p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/6.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\6.png" alt="1765206173794"></p>
+<p><strong>性质 5：对有n个数据的完全二叉树像图那样编号，则编号为i的数据与双亲和孩子的编号之间具有以下关系：</strong></p>
+<ol>
+<li><strong>若i &#x3D; 0，则编号为i的数据是根，无双亲。否则，双亲的编号为⌊(i−1) &#x2F; 2⌋。下取整</strong></li>
+<li><strong>若2i + 1 ≥ n，则编号为i的数据无左孩子，否则，左孩子的编号为2i + 1。</strong></li>
+<li><strong>若2i + 2 ≥ n，则编号为i的数据无右孩子，否则，右孩子的编号为2i + 2。</strong></li>
+</ol>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/7.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\7.png" alt="1765206401454"> </p>
+<p><strong>证明：</strong></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/8.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\8.png" alt="1765206557126"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/9.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\9.png" alt="1765206920669"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/10.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\10.png" alt="1765206944439"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/11.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\11.png" alt="1765206966055"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/12.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\12.png" alt="1765207060357"></p>
+<h3 id="1-3二叉树的存储结构"><a href="#1-3二叉树的存储结构" class="headerlink" title="1.3二叉树的存储结构"></a>1.3二叉树的存储结构</h3><h4 id="1-3-1二叉树的顺序存储结构"><a href="#1-3-1二叉树的顺序存储结构" class="headerlink" title="1.3.1二叉树的顺序存储结构"></a>1.3.1二叉树的顺序存储结构</h4><ul>
+<li>数组描述除了存储数据，还需要存储双亲&#x2F;孩子关系。</li>
+<li>对完全二叉树，在数据编号和数组下标之间建立对应关系，即0号数据存储于下标为0的数组元素，1号数据存储于下标为1的数组元素，…，以此类推。</li>
+<li>根据性质5，根据数据所在数组元素的下标，可以计算出其双亲和左、右孩子所在的数组元素的下标。即通过数组元素下标的计算表示双亲&#x2F;孩子关系。</li>
+</ul>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/13.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\13.png" alt="1765207360803"></p>
+<p>但是要想实现数组存储，要求必须是完全二叉树，那一般的二叉树怎么办呢？</p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/14.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\14.png" alt="1765207566316"></p>
+<p>我们可以想象成完全二叉树，也就是说我们可以补充虚拟数据</p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/15.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\15.png" alt="1765207654596"></p>
+<p><strong>实现：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">sqBinaryTree</span>&lt;T&gt; &#123;</span><br><span class="line">    <span class="keyword">private</span> Object[] data;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">sqBinaryTree</span><span class="params">(<span class="type">int</span> maxSize)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (maxSize &lt;= <span class="number">0</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">IllegalArgumentException</span>(String.valueOf(maxSize));</span><br><span class="line">        data = <span class="keyword">new</span> <span class="title class_">Object</span>[maxSize];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这样存储的话，null会白白浪费很多空间</p>
+<h4 id="1-3-2二叉树的链式存储结构"><a href="#1-3-2二叉树的链式存储结构" class="headerlink" title="1.3.2二叉树的链式存储结构"></a>1.3.2二叉树的链式存储结构</h4> <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/16.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\16.png" alt="1765208107689"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt; &#123;</span><br><span class="line">	T data;</span><br><span class="line">	Node&lt;T&gt; left;</span><br><span class="line">	Node&lt;T&gt; right;</span><br><span class="line"></span><br><span class="line">	Node(T data, Node&lt;T&gt; left, Node&lt;T&gt; right) &#123;</span><br><span class="line">		<span class="built_in">this</span>.data = data;</span><br><span class="line">		<span class="built_in">this</span>.left = left;</span><br><span class="line">		<span class="built_in">this</span>.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>二叉树实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BinaryTree</span>&lt;T&gt; <span class="keyword">implements</span> <span class="title class_">Cloneable</span> &#123;</span><br><span class="line">	<span class="keyword">private</span> Node&lt;T&gt; root;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt; &#123;</span><br><span class="line">		T data;</span><br><span class="line">		Node&lt;T&gt; left;</span><br><span class="line">		Node&lt;T&gt; right;</span><br><span class="line"></span><br><span class="line">		Node(T data, Node&lt;T&gt; left, Node&lt;T&gt; right) &#123;</span><br><span class="line">			<span class="built_in">this</span>.data = data;</span><br><span class="line">			<span class="built_in">this</span>.left = left;</span><br><span class="line">			<span class="built_in">this</span>.right = right;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">BinaryTree</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">public</span> <span class="title function_">BinaryTree</span><span class="params">(T data, BinaryTree&lt;T&gt; leftBiTree, BinaryTree&lt;T&gt; rightBiTree)</span> &#123;</span><br><span class="line">		root = <span class="keyword">new</span> <span class="title class_">Node</span>&lt;&gt;(data, leftBiTree.root, rightBiTree.root);</span><br><span class="line">		leftBiTree.root = rightBiTree.root = <span class="literal">null</span>;</span><br><span class="line">	&#125;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">	BinaryTree&lt;Character&gt; empty = <span class="keyword">new</span> <span class="title class_">BinaryTree</span>&lt;&gt;();</span><br><span class="line">	BinaryTree&lt;Character&gt; bt1 = <span class="keyword">new</span> <span class="title class_">BinaryTree</span>&lt;&gt;(<span class="string">&#x27;B&#x27;</span>, empty, empty);</span><br><span class="line">	BinaryTree&lt;Character&gt; bt2 = <span class="keyword">new</span> <span class="title class_">BinaryTree</span>&lt;&gt;(<span class="string">&#x27;C&#x27;</span>, empty, empty);</span><br><span class="line">	BinaryTree&lt;Character&gt; bt3 = <span class="keyword">new</span> <span class="title class_">BinaryTree</span>&lt;&gt;(<span class="string">&#x27;A&#x27;</span>, bt1, bt2);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>三叉结构：</strong></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/17.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\17.png" alt="1765208361517"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/18.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\18.png" alt="1765208421739"></p>
+<p>实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title class_">Node</span>&lt;T&gt; &#123;</span><br><span class="line">	T data;</span><br><span class="line">	Node&lt;T&gt; parent;</span><br><span class="line">	Node&lt;T&gt; left;</span><br><span class="line">	Node&lt;T&gt; right;</span><br><span class="line">	Node(Tdata, Node&lt;T&gt; parent , Node&lt;T&gt; left, Node&lt;T&gt; right) &#123;</span><br><span class="line">		<span class="built_in">this</span>.data = data;</span><br><span class="line">		<span class="built_in">this</span>.parent = parent;</span><br><span class="line">		<span class="built_in">this</span>.left = left;</span><br><span class="line">		<span class="built_in">this</span>.right = right;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/19.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\19.png" alt="1765208568045"></p>
+<p><strong>双亲链表：</strong></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/20.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\20.png" alt="1765208667500"></p>
+ <img src="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/21.png" class="">
+
+<p><img src="E:\Blog\source_posts\码林秘籍二\21.png" alt="1765208817643"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 结点结构</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">BPTNode</span>&lt;T&gt; &#123;</span><br><span class="line">    T data;</span><br><span class="line">    <span class="type">int</span> parent; <span class="comment">// 指向双亲的指针</span></span><br><span class="line">    <span class="type">char</span> LRTag; <span class="comment">// 左、右孩子标志域</span></span><br><span class="line">    </span><br><span class="line">    ......成员方法</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 树结构</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BPTree</span>&lt;T&gt; &#123;</span><br><span class="line">    BPTNode nodes[];</span><br><span class="line">    <span class="type">int</span> num_node; <span class="comment">// 结点数目</span></span><br><span class="line">    <span class="type">int</span> root; <span class="comment">// 根结点的位置</span></span><br><span class="line">    </span><br><span class="line">    ......成员方法</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>ok，3个小时，前一个小时，卡的要死，没干什么，后边好些了，今天就到这里吧，二叉树还是难的，不过挺有意思的，明天见！</p>
+</blockquote>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>Lsccc</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/Lsccc.github.io/tags/2025-12/"># 2025-12</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/Lsccc.github.io/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/">Polarctf-2025冬季赛</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Lsccc | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
