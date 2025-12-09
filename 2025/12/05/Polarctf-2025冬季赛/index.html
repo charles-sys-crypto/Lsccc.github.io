@@ -321,6 +321,32 @@
 <blockquote>
 <p>当时没看到这个题目</p>
 </blockquote>
+<h2 id="aa"><a href="#aa" class="headerlink" title="aa*"></a>aa<sup>*</sup></h2><p>打开靶机，查看源代码，发现i.php点开后，是一个代码页面，</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/23.png" class="">
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">highlight_file</span>(<span class="keyword">__FILE__</span>);</span><br><span class="line"> <span class="variable">$rawX</span> = <span class="string">&#x27;NjU0Nw==&#x27;</span>;         </span><br><span class="line"> <span class="variable">$rawY</span> = <span class="string">&#x27;123&#x27;</span>;         </span><br><span class="line"> <span class="variable">$rawZ</span> = <span class="string">&#x27;17%2B8&#x27;</span>;        </span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">decodeX</span>(<span class="params"><span class="variable">$value</span></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">intval</span>(<span class="title function_ invoke__">base64_decode</span>(<span class="variable">$value</span>));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">processY</span>(<span class="params"><span class="variable">$value</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$reversed</span> = <span class="title function_ invoke__">strrev</span>(<span class="variable">$value</span>);  </span><br><span class="line">    <span class="variable">$md5Result</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$reversed</span>); </span><br><span class="line">    <span class="keyword">return</span> <span class="title function_ invoke__">substr</span>(<span class="variable">$md5Result</span>, <span class="number">0</span>, <span class="number">8</span>); </span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">decodeZ</span>(<span class="params"><span class="variable">$value</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$decoded</span> = <span class="title function_ invoke__">urldecode</span>(<span class="variable">$value</span>);</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">eval</span>(<span class="string">&quot;return <span class="subst">$decoded</span>;&quot;</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">   <span class="variable">$X</span> = <span class="title function_ invoke__">decodeX</span>(<span class="variable">$rawX</span>);</span><br><span class="line">   <span class="variable">$Y</span> = <span class="title function_ invoke__">processY</span>(<span class="variable">$rawY</span>);</span><br><span class="line">   <span class="variable">$Z</span> = <span class="title function_ invoke__">decodeZ</span>(<span class="variable">$rawZ</span>);</span><br><span class="line"></span><br><span class="line">   <span class="variable">$flag</span> = <span class="variable">$X</span> + <span class="variable">$Y</span> + <span class="variable">$Z</span>;</span><br><span class="line">   </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>交给ai，分析</p>
+<p>X是直接base64解码即可，6547</p>
+<p>Y是先反转，然后md5，caf1a3dfb505ffed0d024130f58c5cfa，最后取前8位，caf1a3df</p>
+<p>Z是url解码，17+8，即是25</p>
+<p>所以flag{6547caf1a3df25}</p>
+<blockquote>
+<p>这道题，也没看到，然后这个i.php，也没找到</p>
+</blockquote>
+<h2 id="来个弹窗2-0"><a href="#来个弹窗2-0" class="headerlink" title="来个弹窗2.0*"></a>来个弹窗2.0<sup>*</sup></h2><p>打开靶机，有一个输入框，根据题目，猜测应该是xss漏洞，什么是xss漏洞呢？就是通过输入javascript代码，来使服务器或者浏览器来执行，通过恶意注入，来获取有用信息，而这个题目是获取弹窗，所以，我们就想办法，弄出弹窗</p>
+<p>查看源代码，发现代码逻辑，访问’&#x2F;get_flag.php，发现不能通过，猜测应该是通过图片标签，来弹窗 </p>
+<p>问ai得到</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;invalid.jpg&quot;</span> <span class="attr">onerror</span>=<span class="string">&quot;alert(&#x27;弹窗内容&#x27;)&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们直接输入，弹出窗口，然后自动跳转了一张图片</p>
+<img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B/24.png" class="">
+
+<p>然后ai分析得知，这个人物是，本萨姆</p>
+<p>然后md5加密，得到flag{0735987a1391de965a0717fc7c4f6a1a}</p>
+<blockquote>
+<p>学会了，xss漏洞</p>
+</blockquote>
 <h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="渐增套娃"><a href="#渐增套娃" class="headerlink" title="渐增套娃*"></a>渐增套娃<sup>*</sup></h2><p>题目：</p>
 <p>​	一天，小明在古玩市场得到一个神秘的套娃，听说这个套娃藏着古代最有钱富豪的宝箱密码，套娃的底部，你	发现了三段标注 “核心加密” 的神秘字符串，根据小明细心研究，这些是逐步叠加嵌套得到的密码，已知flag在初	步被加密为24292125，请帮小明得到宝箱的密码，或许他能和你46分（注：每一个结果中间加一个空格号，再	套上flag{}）<br>​	第一段：22151311012182213<br>​	第二段：36122921261633143212<br>​	第一段：3619373118351933</p>
 <p>Exp：</p>
