@@ -302,8 +302,6 @@
 <p>追踪看一看</p>
 <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B%E4%B8%8B/17.png" class="">
 
-
-
 <p>在这里再看一下它的函数，然后F5反编译，看关键代码</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sub_140011370</span>(&amp;unk_14002200E);</span><br><span class="line"> <span class="built_in">strcpy</span>(Str, <span class="string">&quot;flag&#123;PbkD7j4x|8Wz::z_01&#125;&quot;</span>);</span><br><span class="line"> <span class="built_in">memset</span>(v6, <span class="number">0</span>, <span class="number">0x32u</span>i64);</span><br><span class="line"> v7 = <span class="number">0</span>;</span><br><span class="line"> <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt; <span class="number">5</span>; ++j )</span><br><span class="line">   v6[v7++] = Str[j];		<span class="comment">//前五个字符不变</span></span><br><span class="line"> <span class="keyword">for</span> ( k = <span class="number">0</span>; k &lt; <span class="number">7</span>; ++k )</span><br><span class="line"> &#123;	</span><br><span class="line">   v6[v7] = Str[v7] ^ <span class="number">7</span>;	<span class="comment">//紧接着7个字符与7异或</span></span><br><span class="line">   ++v7;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">for</span> ( m = <span class="number">0</span>; m &lt; <span class="number">7</span>; ++m )</span><br><span class="line"> &#123;</span><br><span class="line">   v6[v7] = Str[v7] ^ <span class="number">8</span>;	<span class="comment">//紧接着7个字符与8进行异或</span></span><br><span class="line">   ++v7;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 
@@ -365,10 +363,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/">码林秘籍(二)</a>
+                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B%E4%B8%8A/">Polarctf-2025冬季赛（上）</a>
             
             
-            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/05/Polarctf2025-%E5%86%AC%E5%AD%A3%E8%B5%9B%E4%B8%8B/">Polarctf-2025冬季赛（下）</a>
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/03/%E7%A2%8E%E7%9F%A5%E8%AF%86/">碎知识</a>
             
         </section>
 
