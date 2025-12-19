@@ -13,7 +13,7 @@
 
 
 
-<title>无话不说 | Lsccc</title>
+<title>第十七届蓝桥杯大赛 | Lsccc</title>
 
 
 
@@ -138,11 +138,76 @@
                 <div class="container">
     
     
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
 
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">无话不说</h1>
+            <h1 class="post-title">第十七届蓝桥杯大赛</h1>
             
                 <div class="post-meta">
                     
@@ -151,14 +216,14 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十二月 14, 2025&nbsp;&nbsp;9:49:14</a>
+                        Date: <a href="#">十二月 20, 2025&nbsp;&nbsp;2:45:43</a>
                         </span>
                     
                     
                         <span class="post-category">
                     Category:
                             
-                                <a href="/Lsccc.github.io/categories/knowledges/">knowledges</a>
+                                <a href="/Lsccc.github.io/categories/competitions/">competitions</a>
                             
                         </span>
                     
@@ -167,18 +232,7 @@
         </header>
 
         <div class="post-content">
-            <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="你不认识我吗?" data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
-  <script id="hbeData" type="hbeData" data-hmacdigest="e937f52160f85de0666b96ad904c8e53e09a9b68e747b646e413f1316676fb24">cc3b4c731d0b315bdb9fb663377e6c70beb9988edbcb167aed806e8c3c247e9ccb3bf951bc36c48e68b51b891b45b187fe3a4256690a06558769493c8c1efa865f1e100cf21236ef14665d6405667d6a309f2545f966c27ffaeafde28715a2b4e21f488dd1f65dfbd10f9ebd8945d2664bc2bd9f79e45d8f923be5b23b7996be0bb682d2a0858e5bd60900a28604af7d101c4e020027e461e27b7ccb759836c2e5e6f971562868238d7a6e6a58cb1b7bfcc79cb0417ca960acf8d8135bbea0f9a8ff7288e2e5dc51e84b77373f7a821d3c8c01594bb41f9f510df11d16c10546176a94e130c64cf6041f3a9a788a428aa83344e3992b95fedc50932e22a8176141c28530f6ce0d3935bb56b64570df2f7fcf8bd2cce16a97ffa169480601d858234c3bcff07a28250186514a0275f8c266d2e109cd714f8ed113338f43e80b41fda8d5f4a2e9e42897a9bc91727add2f4f2080fd143051d44f83e7e932114e62c6dfea5e968600580f2fa57e3b13018f9b540281c3ddae755ceebabdcf359dde00f2f1ff6692a72dbcf0eff9cd5b12503f574d8c9cb9cc35ffd38dea33b8b788219196845ae8804ff31785bea2932295fa8b81bee09fb70f20539057390397d6f4feffcd65b4c2fa647c815fa98699b97a02f639be29d1ddf0689b384603225a3ed35b770e7225e192dedcb4f264fc68288ba539237db4fa5a4a8f43e01ecb91cfab313bd9bdf9657a2b8fa74c47ca1c2acabd095c6d4047cfc50e353205d8e1ad8e14d1093d7463327a2e00b6c556b767f518fb6bfda3e7044bbe4492c9073498a0b4dd43391e68de61fc52906be0d88a6441023c3f7386ac54b0d30cc94c35a8f0788193804403abe377df9e7e61df0baf3d314b11796bb30b6d587ef5df65b8502e9544b28bc6dee7bbe6a66a0ed6fe791e991ae8c37e60192ad000d3ded557e4ca26daa5d26b026220990bbe7779bf6d0a28df56e23fc696d9471c62ecf0850d8e2de5ecbf0e1423beeee0a1b3f6c73ae65a2401c4508f23960fc266f6fca24cef72c0acf9c33c79a37927fc9c9bb2b3f6d8b9cf38fc11adbb8c515068b615602d869f5a63e27a812cf0a452b4e0ae1733d22b2ae14646b8b9843c561cd12114af7ecddb7f831dd2aeeee403caa6b316de8d9ec66bafe0dccf4786a6deb06e84275bb701934a154cad59788c14a941a50deff4c2ee9d1ca30880cc9f367c6417ce67217da93dfc47aafabb47ddc4789f4e4fab249f2da78d5f55537af5c8186047244796016b89daee5cbd88e9ad7fa7c40ab3fc235451f9528295cc973977acf0d09645f890b2e0fb80ba115e064d352b2cf4ca8fbd89906faf7f2c7c4e4ac4159a1a4bde95122a0d8160dd9cc9d4f6b63a01f60392551e5dfe41d6b678530f9efb22096bbcc6459632e50ca914a429191f13d970de9d583e1569a5368aec95e926904ae7f982b9e0505cf8c4906dba499f849462c6ab30c6a81456fb155c22e4d8cbdc0899e420ed697aee9e06dd2fb103351dc3903a14ec8ec92a0c043e46a290096077f17aae7adeb707615b277ae574fe7bb37a3f524ec504782236797575f8f4227be001ae3578ce4410be8d32a453e14fb4fedffecbe3a13d136e1f5a79f1f218be644cb16129141822749a806d319878ee68454400f95a24899c1ca394a1bf4ba69eda1bba33c5980b4f4c7a191afe66f8a858c3127a3347672b6159c921da115a2a1e9cae852bc04525a68fab8e354180fb383dc37655a38f230dfa7049c8ecc910f7276d7acf38ffdaf9693441577940e179e390588549dd8e9b40ba55a75f3d9b8a5c08a300a357000e4701435ee107de23112d0a483c3abfad7388e6d93c74d54408fcf9385b70452c173c89633097cef053a97a6b205deedb3cb9da8d082fb96076eff86dd80567ee0ee4d1d4a55ae65b24d539ce1f4c24a924887bcf052b33efe29c49d9fabdc3</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">你好,这里需要米玛</span>
-      </label>
-    </div>
-  </div>
-</div>
-<script data-pjax src="/Lsccc.github.io/lib/hbe.js"></script><link href="/Lsccc.github.io/css/hbe.style.css" rel="stylesheet" type="text/css">
+            <h2 id="备战"><a href="#备战" class="headerlink" title="备战"></a>备战</h2><h3 id="2025-12-19"><a href="#2025-12-19" class="headerlink" title="2025.12.19"></a>2025.12.19</h3><h3 id="2025-12-20"><a href="#2025-12-20" class="headerlink" title="2025.12.20"></a>2025.12.20</h3><h2 id="省赛"><a href="#省赛" class="headerlink" title="省赛"></a>省赛</h2>
         </div>
 
         
@@ -192,7 +246,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/14/%E6%97%A0%E8%AF%9D%E4%B8%8D%E8%AF%B4/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/14/%E6%97%A0%E8%AF%9D%E4%B8%8D%E8%AF%B4/</a></span>
+                        <span><a href="https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/20/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E8%B5%9B/">https://charles-sys-crypto.github.io/Lsccc.github.io/2025/12/20/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E8%B5%9B/</a></span>
                     </p>
                 
                 
@@ -229,10 +283,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/12/20/%E7%AC%AC%E5%8D%81%E4%B8%83%E5%B1%8A%E8%93%9D%E6%A1%A5%E6%9D%AF%E5%A4%A7%E8%B5%9B/">第十七届蓝桥杯大赛</a>
             
-            
-            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/"></a>
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/14/%E6%97%A0%E8%AF%9D%E4%B8%8D%E8%AF%B4/">无话不说</a>
             
         </section>
 
